@@ -3,9 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechMentorShe</title>
+    <title>API Endpoint Table</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #F2F2F2;
+        }
+    </style>
 </head>
 <body>
-    
+    <h1>Dazzling Jewels</h1>
+    <table>
+        <thead>
+            <h2>USERS ROUTE</h2>
+            <tr>
+                <th>Methods</th>
+                <th>Path</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>GET</td>
+                <td>/</td>
+                <td>Get to our home page</td>
+            </tr>
+            <tr>
+                <td>GET</td>
+                <td>/users</td>
+                <td>Retrieve a list of users.</td>
+            </tr>
+            <tr>
+                <td>POST</td>
+                <td>/register</td>
+                <td>Create a new user.</td>
+            </tr>
+            <tr>
+                <td>PUT</td>
+                <td>/users/:id</td>
+                <td>The user record was updated.</td>
+            </tr>
+            <tr>
+                <td>DELETE</td>
+                <td>/users/:id</td>
+                <td>A user record was deleted</td>
+            </tr>
+         
+        </tbody>
+    </table>
+    <!-- careers -->
+    <table>
+        <thead>
+            <h2>USERS ROUTE</h2>
+            <tr>
+                <th>Methods</th>
+                <th>Path</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>GET</td>
+                <td>/careers</td>
+                <td>Retrieve a list of career bios.</td>
+            </tr>
+            <tr>
+                <td>POST</td>
+                <td>/addCareer</td>
+                <td>add a new mentor career bio.</td>
+            </tr>
+            <tr>
+                <td>PUT</td>
+                <td>/career/:id</td>
+                <td>Update mentors career bio..</td>
+            </tr>
+            <tr>
+                <td>DELETE</td>
+                <td>/users/:id</td>
+                <td>A user record was deleted</td>
+            </tr>
+         
+        </tbody>
+    </table>
 </body>
 </html>
