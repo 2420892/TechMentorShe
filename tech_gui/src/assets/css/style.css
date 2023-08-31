@@ -6,3 +6,19 @@
     padding: 0;
     box-sizing: border-box;
 }
+#app{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: auto minmax(100vh,1fr) auto;
+    background-color: #e7ded9;
+    background-image: url('https://i.postimg.cc/L5R4nzjh/abstract-diagonal-white-grey-background-and-texture-free-vector.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow-x: hidden;
+}
+#app >*{
+    grid-column: 1/-1;
+}
+.nav-item{
+    margin-inline: .4rem;
+}
