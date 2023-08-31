@@ -5,7 +5,7 @@ const {verifyAToken} = require('../middleware/authenticateuser')
 const routes = express.Router()
 
 
-const {users,careers,availability}=require('../model')
+const {users,careers,reservations}=require('../model')
 
 // login
 routes.post('/login',
@@ -59,29 +59,29 @@ routes.patch('/career/:id', bodyParser.json(), (req, res) => {
 routes.delete('/career/:id', (req, res) => {
     careers.deleteCareer(req, res);
 });
-// ====availability=====
-routes.get('/availability', (req, res) => {
-   availability.fetchAvailability(req, res);
+// ====reservations=====
+routes.get('/reservations', (req, res) => {
+   reservations.fetchReservations(req, res);
 });
 
-routes.get('/availability/:id', (req, res) => {
-   availability.fetchAvailability(req, res);
+routes.get('/reservations/:id', (req, res) => {
+   reservations.fetchReservations(req, res);
 });
 
-routes.post('/addAvailability', bodyParser.json(), (req, res) => {
-   availability.addAvailability(req, res);
+routes.post('/addreservations', bodyParser.json(), (req, res) => {
+   reservations.addReservations(req, res);
 });
 
-routes.put('/availability/:id', bodyParser.json(), (req, res) => {
-   availability.updateAvailability(req, res);
+routes.put('/reservations/:id', bodyParser.json(), (req, res) => {
+   reservations.updateReservations(req, res);
 });
 
-routes.patch('/availability/:id', bodyParser.json(), (req, res) => {
-   availability.updateAvailability(req, res);
+routes.patch('/reservations/:id', bodyParser.json(), (req, res) => {
+   reservations.updateReservations(req, res);
 });
 
-routes.delete('/availability/:id', (req, res) => {
-   availability.deleteAvailability(req, res);
+routes.delete('/reservations/:id', (req, res) => {
+   reservations.deleteReservations(req, res);
 });
 
 
