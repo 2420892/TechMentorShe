@@ -82,7 +82,7 @@ class users{
             emailAdd : data.emailAdd,
             userPass : data.userPass
         }
-        const query =`
+        const query =` 
         INSERT INTO users
         SET ?;
         `
