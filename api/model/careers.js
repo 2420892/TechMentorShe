@@ -3,7 +3,7 @@ const db = require("../config");
 class careers {
     fetchCareers(req, res) {
         const query = `
-        SELECT careerID , techField,   techPosition,  describtion
+        SELECT careerID , userID, techField, techPosition, describtion, availDate, startTime, endTime
         FROM careers;
         `;
 
@@ -18,7 +18,7 @@ class careers {
 
     fetchCareer(req, res) {
         const query = `
-        SELECT careerID , techField,   techPosition,  describtion
+        SELECT careerID , userID,techField, techPosition, describtion, availDate, startTime, endTime
         FROM careers
         WHERE careerID = ${req.params.id};
         `;

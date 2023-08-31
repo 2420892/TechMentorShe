@@ -40,9 +40,10 @@ class availability{
     // }
     addAvailability(req, res) {
         const query = `
-        INSERT INTO availability VALUES(${user},{$careers})
+        INSERT INTO availability
         SET ?;
         `;
+
         db.query(query, [req.body], (err) => {
             if (err) throw err;
             res.json({
@@ -51,23 +52,24 @@ class availability{
             });
         });
     }
+    
+    
  
-    updateAvailability(req,res){
-        const query =`
+    updateAvailability(req, res) {
+        const query = `
         UPDATE availability
         SET ?
-        WHERE availID=?;
+        WHERE availID = ?;
         `;
-        db.query(query, [req.body, req.params.id],(err)=>{
-           if (err) throw err
-           res.json({
-            status: statusCode,
-            msg: "The  record was updated."
-
-           });
-     
+        db.query(query, [req.body, req.params.id], (err) => {
+            if (err) throw err;
+            res.json({
+                status: res.statusCode,
+                msg: "The record was updated."
+            });
         });
     }
+    
     deleteAvailability(req,res){
         const query = `
         DELETE FROM availability
