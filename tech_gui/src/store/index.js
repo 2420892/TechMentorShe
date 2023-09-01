@@ -35,6 +35,14 @@ export default createStore({
       } catch (e) {
         context.commit("setMsg", "An error occurred");
       }
+    },
+    async fetchUsers(context){
+      try{
+        const {data} = await axios.get(`${api}users`);
+        context.commit("setUsers",data.results);
+      }catch(e){
+        context.commit("setMsg","An error occured")
+      }
     }
   },
   modules: {
