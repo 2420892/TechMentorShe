@@ -1,7 +1,7 @@
 const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser')
-const {verifyAToken} = require('../middleware/authenticateuser')
+const {verifyAToken} = require('../middleware/Authenticateuser')
 const routes = express.Router()
 
 
