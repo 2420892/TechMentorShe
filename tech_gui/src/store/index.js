@@ -5,10 +5,10 @@ const api = 'https://techmentorshe.onrender.com';
 
 export default createStore({
   state: {
-    users: [],
+    users: null,
     user: null,
     careers: null,
-    career: [],
+    career: null,
     token: null,
     msg: null
   },
