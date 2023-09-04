@@ -1,20 +1,19 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
 
-const api = 'http://localhost:3300/'
+const api = 'https://techmentorshe.onrender.com';
+
 export default createStore({
   state: {
-    users:null,
-    user:null,
-    careers:null,
-    career:null,
-    token:null,
-    msg:null
-  },
-  getters: {
+    users: [],
+    user: null,
+    careers: null,
+    career: [],
+    token: null,
+    msg: null
   },
   mutations: {
-    setUsers(state, users){
+    setUsers(state, users) {
       state.users = users;
     },
     setUser(state, user) {
@@ -25,26 +24,28 @@ export default createStore({
     },
     setCareer(state, career) {
       state.career = career;
+    },
+    setMsg(state, msg) {
+      state.msg = msg;
     }
   },
   actions: {
     async fetchCareers(context) {
       try {
-        const { data } = await axios.get(`${api}careers`);
+        const { data } = await axios.get(`${api}/careers`); 
         context.commit("setCareers", data.results);
       } catch (e) {
         context.commit("setMsg", "An error occurred");
       }
     },
-    async fetchUsers(context){
-      try{
-        const {data} = await axios.get(`${api}users`);
-        context.commit("setUsers",data.results);
-      }catch(e){
-        context.commit("setMsg","An error occured")
+    async fetchUsers(context) {
+      try {
+        const { data } = await axios.get(`${api}/users`); 
+        context.commit("setUsers", data.results);
+      } catch (e) {
+        context.commit("setMsg", "An error occurred");
       }
     }
   },
-  modules: {
-  }
-})
+  modules: {}
+});
