@@ -10,7 +10,7 @@
         >
           <div class="card" style="width: 20rem;">
             <img
-              :src="mentor.mentorID"
+              :src="mentor.image"
               class="card-img-top rounded-circle img-fluid"
               alt="mentorImage"  style="height: 250px;" 
             />
@@ -69,5 +69,8 @@ export default {
 };
 </script>
 <style scoped>
-
+.card{
+  background-color:transparent!important;
+  border:none;
+}
 </style>

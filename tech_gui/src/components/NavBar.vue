@@ -32,7 +32,7 @@
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                UserProfile
+              Register
               </a>
               <ul class="dropdown-menu ">
                 <li><router-link to="/profile" class="dropdown-item" >Become a Mentor</router-link></li>
