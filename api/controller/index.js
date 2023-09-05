@@ -1,89 +1,92 @@
 const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser')
-const {verifyAToken} = require('../middleware/AuthenticateUser')
+const {verifyAToken} = require('../middleware/AuthenticateMentor')
 const routes = express.Router()
 
+const {mentors,mentees,reservations}=require('../model')
 
-const {users,careers,reservations}=require('../model')
-
-// login
+// Mentor login
 routes.post('/login',
 bodyParser.json(), (req, res)=>{
-    users.login(req, res)
+    mentors.login(req, res)
+})
+// Mentee login
+routes.post('/login',
+bodyParser.json(), (req, res)=>{
+    mentees.login(req, res)
 })
 
 // =====user router==========
-routes.get('/users',(req,res)=>{
-    users.fetchUsers(req,res)
+routes.get('/mentors',(req,res)=>{
+    mentors.fetchMentors(req,res)
 })
-routes.get('/user/:id',(req,res)=>{
-    users.fetchUser(req,res)
+routes.get('/mentor/:id',(req,res)=>{
+    mentors.fetchMentor(req,res)
 })
 routes.post('/register', bodyParser.json(),
 (req,res)=>{
-    users.register(req,res)
+    mentors.register(req,res)
 })
-routes.put('/user/:id',bodyParser.json(),
+routes.put('/mentor/:id',bodyParser.json(),
 (req,res)=>{
-    users.updateUser(req,res)
+    mentors.updateMentor(req,res)
 })
-routes.patch('/user/:id',bodyParser.json(),
+routes.patch('/mentor/:id',bodyParser.json(),
 (req,res)=>{
-    users.updateUser(req,res)
+    mentors.updateMentor(req,res)
 })
-routes.delete('/user/:id',(req,res)=>{
-    users.deleteUser(req,res)
+routes.delete('/mentor/:id',(req,res)=>{
+    mentors.deleteMentor(req,res)
 })
-// ===careers router===
-routes.get('/careers',  (req, res) => {
-    careers.fetchCareers(req, res);
+// ===mentees router===
+routes.get('/mentees',  (req, res) => {
+    mentees.fetchMentees(req, res);
 });
 
-routes.get('/career/:id', (req, res) => {
-    careers.fetchCareer(req, res);
+routes.get('/mentee/:id', (req, res) => {
+    mentees.fetchMentee(req, res);
 });
 
-routes.post('/addcareer', bodyParser.json(), (req, res) => {
-    careers.addCareer(req, res);
+routes.post('/addMentee', bodyParser.json(), (req, res) => {
+    mentees.addMentee(req, res);
 });
 
-routes.put('/career/:id', bodyParser.json(), (req, res) => {
-    careers.updateCareer(req, res);
+routes.put('/mentee/:id', bodyParser.json(), (req, res) => {
+    mentees.updateMentee(req, res);
 });
 
-routes.patch('/career/:id', bodyParser.json(), (req, res) => {
-    careers.updateCareer(req, res);
+routes.patch('/mentee/:id', bodyParser.json(), (req, res) => {
+    mentees.updateMentee(req, res);
 });
 
-routes.delete('/career/:id', (req, res) => {
-    careers.deleteCareer(req, res);
+routes.delete('/mentee/:id', (req, res) => {
+    mentees.deleteMentee(req, res);
 });
 // ====reservations=====
-routes.get('/reservations', (req, res) => {
+routes.get('/mentee/:id/reservations', (req, res) => {
    reservations.fetchReservations(req, res);
 });
 
-routes.get('/reservations/:id', (req, res) => {
-   reservations.fetchReservations(req, res);
-});
-
-routes.post('/addreservations', bodyParser.json(), (req, res) => {
+routes.post('/mentee/:id/reservation', bodyParser.json(), (req, res) => {
    reservations.addReservations(req, res);
 });
 
-routes.put('/reservations/:id', bodyParser.json(), (req, res) => {
+routes.put('mentee/:id/reservation/:id', bodyParser.json(), (req, res) => {
    reservations.updateReservations(req, res);
 });
 
-routes.patch('/reservations/:id', bodyParser.json(), (req, res) => {
+routes.patch('mentee/:id/reservation/:id', bodyParser.json(), (req, res) => {
    reservations.updateReservations(req, res);
 });
 
-routes.delete('/reservations/:id', (req, res) => {
+routes.delete('mentee/:id/reservation', (req, res) => {
    reservations.deleteReservations(req, res);
 });
-
+routes.delete('mentee/:id/reservation/:id', (req, res) => {
+    reservations.deleteReservations(req, res);
+ });
+ 
 
 
 module.exports ={

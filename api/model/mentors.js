@@ -1,12 +1,13 @@
 const db = require("../config")
 const{hash,compare,hashSync}=require('bcrypt')
-const {createToken} = require('../middleware/AuthenticateUser')
+const {createToken} = require('../middleware/AuthenticateMentor')
 
-class users{
-    fetchUsers(req,res){
+class mentors{
+    fetchMentors(req,res){
         const query = `
-        SELECT userID, firstName, lastName, emailAdd,  userPass,  userAge, userRole, image
-        FROM users;
+        SELECT mentorID, firstName, lastName, emailAdd,  mentorPass,  mentorAge, mentorRole, image,techField,
+        techPosition, describtion, availDate, startTime, endTime 
+        FROM mentors;
         `
  
         db.query(query, (err,results)=>{
@@ -18,11 +19,12 @@ class users{
         })
 
     }
-    fetchUser(req,res){
+    fetchMentor(req,res){
         const query = `
-        SELECT userID, firstName, lastName, emailAdd,  userPass,  userAge, userRole, image
-        FROM users
-        WHERE userID =${req.params.id};
+        SELECT mentorID, firstName, lastName, emailAdd,  mentorPass,  mentorAge, mentorRole, image,techField,
+        techPosition, describtion, availDate, startTime, endTime
+        FROM mentors
+        WHERE mentorID =${req.params.id};
         `
         db.query(query,(err,result)=>{
             if (err) throw err
@@ -33,11 +35,12 @@ class users{
         })
     }
     login(req, res) {
-        const {emailAdd, userPass} = req.body
+        const {emailAdd, mentorPass} = req.body
         // query
         const query = `
-        SELECT userID, firstName, lastName,   emailAdd,  userPass,  userAge, userRole,image
-        FROM Users
+        SELECT mentorID, firstName, lastName, emailAdd,  mentorPass,  mentorAge, mentorRole, image,techField,
+        techPosition, describtion, availDate, startTime, endTime
+        FROM mentors
         WHERE emailAdd = '${emailAdd}';
         `
         db.query(query, async (err, result)=>{
@@ -48,19 +51,19 @@ class users{
                     msg: "You provided a wrong email."
                 })
             }else {
-                await compare(userPass,
-                    result[0].userPass,
+                await compare(mentorPass,
+                    result[0].mentorPass,
                     (cErr, cResult)=>{
                         if(cErr) throw cErr
                         // Create a token
                         const token =
                         createToken({
                             emailAdd,
-                            userPass
+                            mentorPass
                         })
                         if(cResult) {
                             res.json({
-                                msg: "Logged in",
+                                msg: "You are Logged in",
                                 token,
                                 result: result[0]
                             })
@@ -77,18 +80,18 @@ class users{
     }
     async register(req,res){
         const data = req.body
-        data.userPass = await hash(data.userPass,15)
-        const user = {
+        data.mentorPass = await hash(data.mentorPass,15)
+        const mentor = {
             emailAdd : data.emailAdd,
-            userPass : data.userPass
+            mentorPass : data.mentorPass
         }
         const query =` 
-        INSERT INTO users
+        INSERT INTO mentors
         SET ?;
         `
         db.query(query,[data], (err)=>{
         if(err) throw err
-        let token = createToken(user)
+        let token = createToken(mentor)
         res.json({
             status : res.statusCode,
             token,
@@ -96,38 +99,38 @@ class users{
         })
     })
     }
-    updateUser(req,res){
+    updateMentor(req,res){
         const data =req.body
-        if(data.userPass){
-            data.userPass = hashSync(data.userPass,15)
+        if(data.mentorPass){
+            data.mentorPass = hashSync(data.mentorPass,15)
         }
         const query =`
-        UPDATE users
+        UPDATE mentors
         SET ?
-        WHERE userID=?;
+        WHERE mentorID=?;
         `
         db.query(query, [data, req.params.id],(err)=>{
            if (err) throw err
            res.json({
             status: res.statusCode,
-            msg: "The user record was updated."
+            msg: "The mentor record was updated."
 
            })
      
         })
     }
-    deleteUser(req,res){
+    deleteMentor(req,res){
         const query = `
-        DELETE FROM users
-        WHERE userID =${req.params.id};
+        DELETE FROM mentors
+        WHERE mentorID =${req.params.id};
         `
         db.query(query,(err)=>{
             if (err) throw err
             res.json({
                 status:res.statusCode,
-                msg: "A user record was deleted."
+                msg: "A mentor record was deleted."
             })
         })
     }
 }
-module.exports = users
+module.exports = mentors
