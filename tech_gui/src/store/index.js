@@ -5,43 +5,43 @@ const api = 'https://techmentorshe.onrender.com';
 
 export default createStore({
   state: {
-    users: null,
-    user: null,
-    careers: null,
-    career: null,
+    mentees: null,
+    mentee: null,
+    mentors: null,
+    mentor: null,
     token: null,
     msg: null
   },
   mutations: {
-    setUsers(state, users) {
-      state.users = users;
+    setMentees(state, mentees) {
+      state.mentees = mentees;
     },
-    setUser(state, user) {
-      state.user = user;
+    setMentee(state, mentee) {
+      state.mentee = mentee;
     },
-    setCareers(state, careers) {
-      state.careers = careers;
+    setMentors(state, mentors) {
+      state.mentors = mentors;
     },
-    setCareer(state, career) {
-      state.career = career;
+    setMentor(state, mentor) {
+      state.mentor = mentor;
     },
     setMsg(state, msg) {
       state.msg = msg;
     }
   },
   actions: {
-    async fetchCareers(context) {
+    async fetchMentors(context) {
       try {
-        const { data } = await axios.get(`${api}/careers`); 
-        context.commit("setCareers", data.results);
+        const { data } = await axios.get(`${api}/mentors`); 
+        context.commit("setMentors", data.results);
       } catch (e) {
         context.commit("setMsg", "An error occurred");
       }
     },
-    async fetchUsers(context) {
+    async fetchMentees(context) {
       try {
-        const { data } = await axios.get(`${api}/users`); 
-        context.commit("setUsers", data.results);
+        const { data } = await axios.get(`${api}/mentees`); 
+        context.commit("setMentees", data.results);
       } catch (e) {
         context.commit("setMsg", "An error occurred");
       }
