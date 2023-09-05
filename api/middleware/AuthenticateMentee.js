@@ -1,10 +1,10 @@
 
 const {sign,verify}=require('jsonwebtoken')
 require("dotenv").config()
-function createToken(user){
+function createToken(mentee){
     return sign({
-        emailAdd:user.emailAdd,
-        userPass:user.userPass
+        emailAdd:mentee.emailAdd,
+        menteePass:mentee.menteePass
     },
     process.env.SECRET_KEY,
     {

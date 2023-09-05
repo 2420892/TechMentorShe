@@ -1,11 +1,11 @@
-const users = require('./users')
-const careers =require('./careers')
+const mentors = require('./mentors')
+const mentees =require('./mentees')
 const reservations = require('./reservations')
 
 // // EXPORT AL OBJJECTS
 module.exports = {
-    users: new users(),
-    careers: new careers(),
+    mentors: new mentors(),
+    mentees: new mentees(),
     reservations : new reservations(),
  
 }
