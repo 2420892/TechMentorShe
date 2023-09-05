@@ -3,11 +3,9 @@ const db = require("../config")
 class reservations{
     fetchReservations(req, res) {
         const query = `
-        SELECT r.resID, u.firstName, u.lastName, c.describtion,
-        c.availDate, c.startTime, c.endTime
+        SELECT r.resID, a.firstName, a.lastName, a.image, a.availDate, a.startTime, a.endTime
         FROM reservations  r
-        JOIN users u ON a.userID = u.userID
-        JOIN careers AS c ON a.careerID = c.careerID;
+        INNER JOIN mentors a ON r.mentorID=a.mentorID;
     `;
         db.query(query, (err, results) => {
             if (err) throw err;
@@ -18,13 +16,13 @@ class reservations{
         });
     }
     addReservations(req, res) {
-        const { userID, careerID } = req.body;
+        const {  menteeID, mentorID } = req.body;
         const query = `
-            INSERT INTO reservations (userID, careerID)
+            INSERT INTO reservations ( menteeID, mentorID)
             VALUES (?, ?);
         `;
     
-        db.query(query, [userID, careerID], (err) => {
+        db.query(query, [menteeID, mentorID], (err) => {
             if (err) {
                 console.error(err);
                 res.status(500).json({
