@@ -1,5 +1,8 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
+import VueSweetalert2 from 'vue-sweetalert2'
+import { useCookies } from "vue3-cookies"
+import router from '@/router'
 
 const api = 'https://techmentorshe.onrender.com';
 

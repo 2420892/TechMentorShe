@@ -41,6 +41,10 @@
               </ul>
             </li>
             <li class="nav-item">
+              <router-link to="/admin"><i class="bi bi-motherboard-fill"></i>Admin</router-link>
+              <!-- I should hide this to non-users -->
+            </li>
+            <li class="nav-item">
               <router-link to="/contact"><i class="bi bi-person-lines-fill"></i>Contact</router-link>
             </li>
           </ul>
