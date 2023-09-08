@@ -77,7 +77,7 @@ class mentees{
     }
     async addMentee(req,res){
         const data = req.body
-        data.menteePass = await hash(data.menteePass,15)
+        data.menteePass = await hash(data.menteePass,10)
         const mentee = {
             emailAdd : data.emailAdd,
             menteePass : data.menteePass
@@ -99,7 +99,7 @@ class mentees{
     updateMentee(req,res){
         const data =req.body
         if(data.menteePass){
-            data.menteePass = hashSync(data.menteePass,15)
+            data.menteePass = hashSync(data.menteePass,10)
         }
         const query =`
         UPDATE mentees
