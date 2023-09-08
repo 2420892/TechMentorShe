@@ -50,6 +50,14 @@ export default createStore({
         context.commit("setMsg", "An error occurred");
       }
     },
+    async fetchMentee(context) {
+      try {
+        const { data } = await axios.get(`${api}/mentee/${menteeID}`); 
+        context.commit("setMentee", data.result);
+      } catch (e) {
+        context.commit("setMsg", "An error occurred");
+      }
+    },
   async register({ commit}, mentorData) {
     console.log(mentorData)
     try {
@@ -124,9 +132,9 @@ export default createStore({
     }
   },
   async deleteMentee({ commit }, menteeID) {
+
     try {
       const res = await axios.delete(`${api}/mentee/${menteeID}`);
-   
       if (res.status === 200) { 
         Swal.fire({
           icon: "success",
@@ -166,7 +174,7 @@ export default createStore({
         Swal.fire({
           title: msg,
           text: `You are not registered, or provided wrong register details`,
-          icon: "failed"
+          icon: "success"
         });
         router.push("/logIn");
       }
@@ -175,34 +183,34 @@ export default createStore({
     }
   },
   // mentor
-  async login(context, payload) {
-    try {
-      const { msg, token, result } = (await axios.post(`${api}/mentor/login`, payload)).data;
+  // async login(context, payload) {
+  //   try {
+  //     const { msg, token, result } = (await axios.post(`${api}/mentor/login`, payload)).data;
    
   
-      if (result) {
-        context.commit('setMentor', { result, msg });
-        cookies.set('LegitMentor', { token, msg, result });
-        authUser.applyToken(token);
-        Swal.fire({
-          title: msg,
-          text: `Welcome back ${result?.firstName} ${result.lastName}`,
-          icon: "success",
-          timer: 2000
-        });
-        router.push("/");
-      } else {
-        Swal.fire({
-          title: msg,
-          text: `You are not registered, or provided wrong register details`,
-          icon: "failed"
-        });
-        router.push("/logIn");
-      }
-    } catch (error) {
-      console.error("Mentor login failed:", error);
-    }
-  },
+  //     if (result) {
+  //       context.commit('setMentor', { result, msg });
+  //       cookies.set('LegitMentor', { token, msg, result });
+  //       authUser.applyToken(token);
+  //       Swal.fire({
+  //         title: msg,
+  //         text: `Welcome back ${result?.firstName} ${result.lastName}`,
+  //         icon: "success",
+  //         timer: 2000
+  //       });
+  //       router.push("/");
+  //     } else {
+  //       Swal.fire({
+  //         title: msg,
+  //         text: `You are not registered, or provided wrong register details`,
+  //         icon: "failed"
+  //       });
+  //       router.push("/logIn");
+  //     }
+  //   } catch (error) {
+  //     console.error("Mentor login failed:", error);
+  //   }
+  // },
   // logout
   async logOut(context) {
     context.commit("setMentor");

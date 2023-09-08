@@ -24,7 +24,7 @@
                         </div>
       
                         <div class="form-outline mb-4">
-                          <input v-model="payload.mentorPass" type="password" id="form2Example22" class="form-control" />
+                          <input v-model="payload.menteePass" type="password" id="form2Example22" class="form-control" />
                           <label class="form-label" for="form2Example22">Password</label>
                         </div>
       
@@ -66,7 +66,7 @@
         payload: {
         emailAdd: '',
         menteePass: '',
-        mentorPass:"",
+     
       }
     };
   },
@@ -74,9 +74,7 @@
     mentee(){
         return this.$store.state.mentee
     },
-    mentor(){
-        return this.$store.state.mentor
-    },
+  
   },
   methods: {
     login() {  
