@@ -36,8 +36,8 @@
               </a>
               <ul class="dropdown-menu ">
                 <li><router-link to="/profile" class="dropdown-item" >Become a Mentor</router-link></li>
-                <li><router-link to="/profile" class="dropdown-item" >Become a Mentee</router-link></li>
-                <li><router-link to="/profile" class="dropdown-item" >LogIn</router-link></li>
+                <li><router-link to="/SignupMentee" class="dropdown-item" >Become a Mentee</router-link></li>
+                <li><router-link to="/LogIn" class="dropdown-item" >LogIn</router-link></li>
               </ul>
             </li>
             <li class="nav-item">
@@ -46,6 +46,9 @@
             </li>
             <li class="nav-item">
               <router-link to="/contact"><i class="bi bi-person-lines-fill"></i>Contact</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/"><i class="bi bi-person-lines-fill"></i>logout</router-link>
             </li>
           </ul>
         </div>

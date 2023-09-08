@@ -7,10 +7,12 @@
 <script>
 import SpinnerCompVue from '../components/SpinnerComp.vue';
 import SignupMentor from '@/components/SignupMentor.vue';
+import SignupMentee from '@/components/SignupMentee.vue';
 export default {
   components: {
     SpinnerCompVue,
-    SignupMentor
+    SignupMentor,
+    SignupMentee
   }
     }
 </script>

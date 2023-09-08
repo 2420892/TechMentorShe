@@ -49,8 +49,8 @@
         </div>
       </div>
     </div>
-    <div class="container mt-4 md-4 sm-1">
-      <h2 id="featured" style="padding-top:70px;">Our Sheroes</h2>
+    <div class="container mt-4 md-4 sm-1" style="background-color:rgba(237,237,237,255);">
+      <h2 id="featured" style="padding-top:40px;"> Meet Our Sheroes</h2>
       <div class="row justify-content-center " v-if="mentors">
         <div v-for="mentor in mentors" :key="mentor.mentorID" class="col-lg-3 col-md-4 col-sm-6 mb-4">
           <div class="card d-flex flex-column h-60">

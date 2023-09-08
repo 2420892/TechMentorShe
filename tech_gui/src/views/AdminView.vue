@@ -1,5 +1,36 @@
 <template>
     <div class="container-fluid">
+      <h2>MENTees</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Image</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>email Address</th>
+            <th>mentee age</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="mentee in mentees" :key="mentee.id">
+            <td>{{ mentee.menteeID }}</td>
+            <td>
+              <div class="mentor-image">
+                <img class="img-top img-fluid rounded-circle" :src="mentee.image" alt="Mentor Image" style="width:4rem;height:4rem;">
+              </div>
+            </td>
+            <td>{{ mentee.firstName }}</td>
+            <td>{{ mentee.lastName }}</td>
+            <td>{{ mentee.emailAdd }}</td>
+            <td>{{ mentee.menteeAge }}</td>
+            <td>
+              <button class="btn btn-primary" @click="deleteMentee(mentee.menteeID)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>  
       <h2>MENTORS</h2>
       <table class="table">
         <thead>
@@ -26,14 +57,13 @@
             <td>{{ mentor.techPosition }}</td>
             <td>{{formattedAvailDate(mentor.availDate) }}<br>Time:{{ mentor.startTime }} - {{ mentor.endTime }}</td>
             <td>
-              <button class="btn btn-primary" @click="deleteMentor(mentor.id)">Delete</button>
-              <button class="btn btn-secondary" @click="editMentor(mentor)">Edit</button>
+              <button class="btn btn-primary" @click="deleteMentor(mentor.mentorID)">Delete</button>
             </td>
           </tr>
         </tbody>
       </table>  
       <!-- Edit Mentor Modal -->
-      <div v-if="showEditModal" class="modal-over">
+      <!-- <div v-if="showEditModal" class="modal-over">
         <div class="modal-content">
           <h3>Edit Mentor</h3>
           <form @submit.prevent="updateMentor">
@@ -69,10 +99,10 @@
               <input type="text" id="editMentorEndTime" v-model="editMentorData.endTime" required>
             </div>
             <button class="btn btn-primary" type="submit" :disabled="isLoadingUpdate">Update</button>
-            <button class="btn btn-secondary" @click="showEditModal = false" :disabled="isLoadingUpdate">Cancel</button>
+          
           </form>
         </div>
-      </div>
+      </div> -->
     </div>
   </template>
   
@@ -81,11 +111,13 @@
   export default {
     components: {
       SpinnerComp,
-      // Add other components as needed
     },
     computed: {
     mentors() {
       return this.$store.state.mentors;
+    },
+    mentees() {
+      return this.$store.state.mentees;
     },
   },
   methods: {
@@ -96,11 +128,20 @@
       }
       return '';
     },
+    deleteMentor(mentorID) {
+  this.$store.dispatch('deleteMentor', mentorID);
+},
+deleteMentee(menteeID) {
+  this.$store.dispatch('deleteMentee', menteeID);
+},
+
   },
   mounted() {
     this.$store.dispatch('fetchMentors');
+    this.$store.dispatch('fetchMentees');
   
   },
+
 };
   </script>
   
