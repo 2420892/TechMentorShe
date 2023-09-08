@@ -80,7 +80,7 @@ class mentors{
     }
     async register(req,res){
         const data = req.body
-        data.mentorPass = await hash(data.mentorPass,15)
+        data.mentorPass = await hash(data.mentorPass,10)
         const mentor = {
             emailAdd : data.emailAdd,
             mentorPass : data.mentorPass
@@ -102,7 +102,7 @@ class mentors{
     updateMentor(req,res){
         const data =req.body
         if(data.mentorPass){
-            data.mentorPass = hashSync(data.mentorPass,15)
+            data.mentorPass = hashSync(data.mentorPass,10)
         }
         const query =`
         UPDATE mentors
