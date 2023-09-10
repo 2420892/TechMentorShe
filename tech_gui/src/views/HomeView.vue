@@ -79,7 +79,7 @@ export default {
   computed: {
     mentors() {
       if (this.$store.state.mentors) {
-        const mentorID = [1,2,4,5 ];
+        const mentorID = [2,4,20,21 ];
         return this.$store.state.mentors.filter(mentor => mentorID.includes(mentor.mentorID));
       }
       return this.$store.state.mentors;

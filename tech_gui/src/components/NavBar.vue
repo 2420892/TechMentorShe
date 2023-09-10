@@ -22,11 +22,11 @@
             <li class="nav-item">
               <router-link to="/about"><i class="bi bi-file-person"></i>About</router-link>
             </li>
-            <li class="nav-item">
+            <li class="nav-item"   >
               <router-link to="/mentors"><i class="bi bi-mortarboard-fill"></i>OurMentors</router-link>
             </li>
           
-            <li class="nav-item">
+            <li class="nav-item" v-if="isMentee || isMentor">
               <router-link to="/reservations"><i class="bi bi-motherboard-fill"></i>Reservations</router-link>
               <!-- I should hide this to non-users -->
             </li>
@@ -40,7 +40,7 @@
                 <li><router-link to="/LogIn" class="dropdown-item" >LogIn</router-link></li>
               </ul>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" v-if="isMentor">
               <router-link to="/admin"><i class="bi bi-motherboard-fill"></i>Admin</router-link>
               <!-- I should hide this to non-users -->
             </li>
@@ -51,7 +51,7 @@
               <router-link to="/"><i class="bi bi-person-lines-fill"></i>logout</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/profilelog"><i class="bi bi-person-lines-fill"></i>profile</router-link>
+              <router-link to="/profilelog" ><i class="bi bi-person-lines-fill"></i>profile</router-link>
             </li>
           </ul>
         </div>
@@ -61,8 +61,24 @@
 </template>
 
 <script>
-export default {
+import { mapState } from 'vuex';
 
+export default {
+  computed: {
+    ...mapState(['mentor', 'mentee']),
+    isMentor() {
+      return this.mentor !== null;
+    },
+    isMentee() {
+      return this.mentee !== null;
+    },
+    isAdmin() {
+      // Add logic to check if the user is an admin
+      // For example, if you have an 'admin' role in your Vuex store
+      // You can use this.admin === true
+      return false; // Change this logic according to your implementation
+    },
+  },
 };
 </script>
 
@@ -74,3 +90,4 @@ i{
 }
 
 </style>
+

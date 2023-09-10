@@ -35,13 +35,21 @@
                 <i
                   class="bi bi-quote"
                   style="font-size: 2rem; color: #00CED1;"
-                ></i>
-                {{ mentor.description }}
+                ></i>{{ mentor.describtion }}
               </p>
               <p>Available on:{{ formattedAvailDate(mentor.availDate) }}</p>
               <p>from: {{ mentor.startTime }}</p>
               <p>TO:{{ mentor.endTime }}</p>
-              <a href="#" class="btn btn-primary">Make a reservation</a>
+          
+              <router-link :to="{ name: 'SingleView', params: { mentorID: mentor.mentorID } }">
+                View More
+              </router-link>
+
+
+
+          
+
+
             </div>
           </div>
         </div>
@@ -54,7 +62,7 @@
 </template>
 
 <script>
-import SpinnerCompVue from '../components/SpinnerComp.vue';
+import  SpinnerCompVue from '../components/SpinnerComp.vue';
 
 export default {
   components: {

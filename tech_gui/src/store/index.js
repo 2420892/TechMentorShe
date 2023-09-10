@@ -31,7 +31,10 @@ export default createStore({
     },
     setMsg(state, msg) {
       state.msg = msg;
-    }
+    },
+    setErrorMessage(state, message) {
+      state.errorMessage = message;
+    },
   },
   actions: {
     async fetchMentors(context) {
@@ -42,6 +45,15 @@ export default createStore({
         context.commit("setMsg", "An error occurred");
       }
     },
+    async fetchMentor({ commit }, mentorID) {
+      try {
+        const { data } = await axios.get(`/${api}/mentor/${mentorID}`);
+        commit('setMentor', data.result);
+      } catch (error) {
+        commit('setErrorMessage', 'An error occurred while fetching mentor data.');
+      }
+    },
+    
     async fetchMentees(context) {
       try {
         const { data } = await axios.get(`${api}/mentees`); 
