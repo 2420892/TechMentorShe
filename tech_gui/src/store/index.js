@@ -13,10 +13,15 @@ export default createStore({
     mentee: null,
     mentors: null,
     mentor: null,
+    reservation: null,
     token: null,
-    msg: null
+    msg: null,
+    reservations:[],
   },
   mutations: {
+    setReservations(state, reservation) {
+      state.reservation = reservation;
+    },
     setMentees(state, mentees) {
       state.mentees = mentees;
     },
@@ -35,7 +40,14 @@ export default createStore({
     setErrorMessage(state, message) {
       state.errorMessage = message;
     },
-  },
+  
+    addReservation(state, reservation) {
+      state.reservations.push(reservation);
+    },
+    removeReservation(state, resID) {
+      state.reservations = state.reservations.filter((reservation) => reservation.resID !== resID);
+    },
+  }, 
   actions: {
     async fetchMentors(context) {
       try {
@@ -240,6 +252,62 @@ if(res.status === 200){
       }
     } catch (error) {
       console.error("Mentor login failed:", error);
+    }
+  },
+  // reservations
+  async fetchReservations({ commit }, menteeID) {
+    try {
+      const response = await axios.get(`/mentee/${menteeID}/reservations`);
+      commit('setReservations', response.data.results);
+    } catch (error) {
+      console.error(error);
+    }
+  },
+  async addReservation(context,payload){
+try{
+  const {msg ,token,result} = (await axios.post(`${api}/reservation`,payload)).data;
+  if (result) {
+    cookies.set("setMentor", { msg, token, result });
+    authenticateUser.applyToken(token);
+    sweet({
+      title: "msg",
+      text: `Registered under user ${result?.menteeID} ` ,
+      icon: "success",
+      timer: 4000,
+    });
+    context.dispatch("fetchReservations");
+    router.push({ name: "/" });
+  } else {
+    sweet({
+      title: "Error",
+      text: msg,
+      icon: "error",
+      timer: 4000
+    });
+  }
+
+}catch(e){
+  context.commit("setMsg","An error has occured")
+}
+  },
+  // async addReservation({ commit }, { menteeID, mentorID }) {
+  //   try {
+  //     const response = await axios.post(`/mentee/${menteeID}/reservation`, { menteeID, mentorID });
+  //     if (response.status === 200) {
+  //       commit('addReservation', response.data);
+  //     } else {
+  //       // Handle other response statuses or errors
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // },
+  async removeReservation({ commit }, { menteeID, resID }) {
+    try {
+      await axios.delete(`/mentee/${menteeID}/reservation/${resID}`);
+      commit('removeReservation', resID);
+    } catch (error) {
+      console.error(error);
     }
   },
   // logout

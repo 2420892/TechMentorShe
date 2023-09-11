@@ -22,8 +22,9 @@ const routes = [
     component: () => import('../views/MentorsView.vue')
   },
   {
-    path: '/reservations',
-    name: 'reservations',
+    
+      path: '/reservations',
+      name: 'reservations',
     component: () => import('../views/ReservationsView.vue')
   },
   {
