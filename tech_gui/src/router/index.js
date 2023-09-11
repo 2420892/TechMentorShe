@@ -51,19 +51,12 @@ const routes = [
     name: 'SignupMentee',
     component: SignupMentee,
   },
-// router/index.js
-
-  // ...other routes
   {
     path: '/SingleView/:mentorID',
     name: 'SingleView',
     component: () => import('../views/SingleView.vue'),
   },
-  
-
-
-  
-  
+    
   {
     path: '/LogIn',
     name: 'LogIn',

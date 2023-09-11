@@ -16,7 +16,6 @@
         <option value="after12">After 12:00:00</option>
       </select>
     </div>
-
     <div v-if="filteredMentors.length > 0">
       <div class="row">
         <div v-for="mentor in filteredMentors" :key="mentor.mentorID" class="col-md-4 mb-4">
@@ -40,16 +39,9 @@
               <p>Available on:{{ formattedAvailDate(mentor.availDate) }}</p>
               <p>from: {{ mentor.startTime }}</p>
               <p>TO:{{ mentor.endTime }}</p>
-          
               <router-link :to="{ name: 'SingleView', params: { mentorID: mentor.mentorID } }">
                 View More
               </router-link>
-
-
-
-          
-
-
             </div>
           </div>
         </div>
@@ -104,7 +96,7 @@ export default {
   },
   async beforeMount() {
     await this.$store.dispatch('fetchMentors');
-    this.techFields = [...new Set(this.mentors.map((mentor) => mentor.techField))];
+    this.techFields = [...new Set(this.mentors?.map((mentor) => mentor.techField))];
     this.filterMentors(); 
   },
 };
