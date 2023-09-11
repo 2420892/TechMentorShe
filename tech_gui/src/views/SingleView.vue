@@ -1,10 +1,26 @@
 <template>
-    <div>
-      <div v-if="mentor" class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">{{ mentor.firstName }} {{ mentor.lastName }}</h5>
-        
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+    <div class="d-flex justify-content-center align-items-center vh-100"> 
+      <div v-if="mentor" class="card mb-3" style="max-width: 1000px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img
+            :src="mentor.image"
+              :alt="mentor.firstName"
+              class="img-fluid rounded-start h-100"
+            />
+          </div>
+          <div class="col-md-8">
+            <div class="card-body custom-card-body-height">
+              <h4 class="card-title">My Name is {{ mentor.firstName }} {{ mentor.lastName }}. <br> I am {{mentor.mentorAge}} years old.</h4>
+              <p class="card-text">
+                I studied {{mentor.techField}}. And now I am currently working as {{mentor.techPosition}}.I am excited to mentor you and guide you in tech. I am  Looking forward to ouor Journey.
+              </p>
+              <p class="card-text">
+                <small class="text-muted"> You can email me at {{ mentor.emailAdd }} .</small>
+              </p>
+              <a href="">Make a reservation</a>
+            </div>
+          </div>
         </div>
       </div>
       <div v-else>
@@ -25,10 +41,15 @@
     console.log(mentorID);
     this.$store.dispatch("fetchMentor", mentorID)
   },
+ 
 };
   </script>
   
   <style scoped>
- 
+  .custom-card-body-height {
+    height: 400px; 
+  }
+  .card-text{
+    font-size: 20px;
+  }
   </style>
-  
