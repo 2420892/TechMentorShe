@@ -34,7 +34,7 @@ class mentors{
             })
         })
     }
-    login(req, res) {
+    login2(req, res) {
         const {emailAdd, mentorPass} = req.body
         // query
         const query = `
