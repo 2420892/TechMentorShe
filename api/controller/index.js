@@ -7,7 +7,7 @@ const routes = express.Router()
 const {mentors,mentees,reservations}=require('../model')
 
 // Mentor login
-routes.post('/mentor/login',
+routes.post('/mentor/login2',
 bodyParser.json(), (req, res)=>{
     mentors.login(req, res)
 })
