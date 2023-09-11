@@ -9,7 +9,7 @@ const {mentors,mentees,reservations}=require('../model')
 // Mentor login
 routes.post('/mentor/login2',
 bodyParser.json(), (req, res)=>{
-    mentors.login(req, res)
+    mentors.login2(req, res)
 })
 // Mentee login
 routes.post('/mentee/login',
