@@ -45,14 +45,6 @@ export default createStore({
         context.commit("setMsg", "An error occurred");
       }
     },
-    // async fetchMentor({ commit }, mentorID) {
-    //   try {
-    //     const { data } = await axios.get(`/${api}/mentor/${mentorID}`);
-    //     commit('setMentor', data.result);
-    //   } catch (error) {
-    //     commit('setErrorMessage', 'An error occurred while fetching mentor data.');
-    //   }
-    // },
     async fetchMentor(context, mentorID) {
       try {
         const { result } = (await axios.get(`${api}/mentor/${mentorID}`)).data;
@@ -172,6 +164,26 @@ export default createStore({
     }
    
   },
+  async updateMentee({commit},menteeID){
+    try{
+const res =await axios.put(`${api}/mentee/${menteeID}`);
+if(res.status === 200){
+  Swal.fire({
+    icon:'success',
+    title:"Mentee  updated",
+    text:"Your information has been updated"
+  });
+}else{
+  Swal.fire({
+    icon:"error",
+  title:"Update failed",
+  text:"An error occured during update"
+  })
+}
+    }catch(error){
+      console.error("Mentee dupdate failed:", error);
+    }
+  },
   // mentee
   async login(context, payload) {
     try {
@@ -202,34 +214,34 @@ export default createStore({
     }
   },
   // mentor
-  // async login(context, payload) {
-  //   try {
-  //     const { msg, token, result } = (await axios.post(`${api}/mentor/login`, payload)).data;
+  async login2(context, payload2) {
+    try {
+      const { msg, token, result } = (await axios.post(`${api}/mentor/login2`, payload2)).data;
    
   
-  //     if (result) {
-  //       context.commit('setMentor', { result, msg });
-  //       cookies.set('LegitMentor', { token, msg, result });
-  //       authUser.applyToken(token);
-  //       Swal.fire({
-  //         title: msg,
-  //         text: `Welcome back ${result?.firstName} ${result.lastName}`,
-  //         icon: "success",
-  //         timer: 2000
-  //       });
-  //       router.push("/");
-  //     } else {
-  //       Swal.fire({
-  //         title: msg,
-  //         text: `You are not registered, or provided wrong register details`,
-  //         icon: "failed"
-  //       });
-  //       router.push("/logIn");
-  //     }
-  //   } catch (error) {
-  //     console.error("Mentor login failed:", error);
-  //   }
-  // },
+      if (result) {
+        context.commit('setMentor', { result, msg });
+        cookies.set('LegitMentor', { token, msg, result });
+        authUser.applyToken(token);
+        Swal.fire({
+          title: msg,
+          text: `Welcome back ${result?.firstName} ${result.lastName}`,
+          icon: "success",
+          timer: 2000
+        });
+        router.push("/");
+      } else {
+        Swal.fire({
+          title: msg,
+          text: `You are not registered, or provided wrong register details`,
+          icon: "failed"
+        });
+        router.push("/logIn");
+      }
+    } catch (error) {
+      console.error("Mentor login failed:", error);
+    }
+  },
   // logout
   async logOut(context) {
     context.commit("setMentor");

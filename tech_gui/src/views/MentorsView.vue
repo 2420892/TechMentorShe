@@ -42,6 +42,7 @@
               <router-link :to="{ name: 'SingleView', params: { mentorID: mentor.mentorID } }">
                 View More
               </router-link>
+              <router-link :to="{}">Make Reservation</router-link>
             </div>
           </div>
         </div>

@@ -15,7 +15,7 @@
                       </div>
       
                       <form >
-                        <p>Please login to your account</p>
+                        <p>Please login to your Mentee account</p>
       
                         <div class="form-outline mb-4">
                           <input v-model="payload.emailAdd" type="email" id="form2Example11" class="form-control"
@@ -30,6 +30,25 @@
       
                         <div class="text-center pt-1 mb-5 pb-1">
                           <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button" @click.prevent="login">Log
+                            in</button>
+                          <a class="text-muted" href="#!">Forgot password?</a>
+                        </div>
+      <!-- mentor -->
+      <p>Please login to your Mentee account</p>
+      
+                        <div class="form-outline mb-4">
+                          <input v-model="payload2.emailAdd" type="email" id="form3Example11" class="form-control"
+                            placeholder="Phone number or email address" />
+                          <label class="form-label" for="form3Example11">Username</label>
+                        </div>
+      
+                        <div class="form-outline mb-4">
+                          <input v-model="payload2.mentorPass" type="password" id="form3Example22" class="form-control" />
+                          <label class="form-label" for="form3Example22">Password</label>
+                        </div>
+      
+                        <div class="text-center pt-1 mb-5 pb-1">
+                          <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button" @click.prevent="login2">Log
                             in</button>
                           <a class="text-muted" href="#!">Forgot password?</a>
                         </div>
@@ -67,18 +86,30 @@
         emailAdd: '',
         menteePass: '',
      
-      }
+      },
+      payload2: {
+        emailAdd: '',
+        mentorPass: '',
+     
+      },
     };
   },
   computed:{
     mentee(){
         return this.$store.state.mentee
     },
+    mentor(){
+        return this.$store.state.mentor
+    },
   
   },
   methods: {
     login() {  
   this.$store.dispatch("login", this.payload);
+
+    },
+    login2() {  
+  this.$store.dispatch("login2", this.payload2);
 
     }
   }

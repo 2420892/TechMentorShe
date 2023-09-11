@@ -59,7 +59,7 @@
               <p class="card-title">{{ mentor.firstName }} ({{mentor.mentorAge}})</p>
               <p class="card-title">{{ mentor.techField}} </p>
               <p class="card-title">{{mentor.techPosition}}</p>
-              <a class="view" href="/products">View More</a>
+              <a class="view" href="/mentors">View More</a>
             </div>
           </div>
         </div>
