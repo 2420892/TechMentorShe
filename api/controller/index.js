@@ -68,7 +68,7 @@ routes.get('/mentee/:id/reservations', (req, res) => {
    reservations.fetchReservations(req, res);
 });
 
-routes.post('/mentee/:id/reservation', bodyParser.json(), (req, res) => {
+routes.post('reservation', bodyParser.json(), (req, res) => {
    reservations.addReservations(req, res);
 });
 
