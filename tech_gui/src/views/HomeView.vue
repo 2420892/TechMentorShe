@@ -19,7 +19,7 @@
       <h2>HOW TechMentorShe Works!</h2>
       <div class="row align-items-start">
         <div class="col">
-          <div class="card" style="width: 18rem;">
+          <div class="card" style="width: 18rem;height:16rem;">
             <div class="icon-circle">
               <i class="bi bi-door-open-fill" style="font-size: 4rem; color: #00CED1;"></i>
             </div>
@@ -30,21 +30,25 @@
           </div>
         </div>
         <div class="col">
-          <div class="card" style="width: 18rem;">
+          <div class="card" style="width: 18rem;height:16rem;">
             <div class="icon-circle">
               <i class="bi bi-people-fill" style="font-size: 4rem; color: #00CED1;"></i>
             </div>
             <h3>Access Mentoring</h3>
-            <p>Get linked with your desired mentor by making a meeting reservation with the mentor available on your suited time.</p>
+            <div class="card-body">
+            <p  class="card-text">Get linked with your desired mentor by making a meeting reservation with the mentor available on your suited time.</p>
+          </div>
           </div>
         </div>
         <div class="col">
-          <div class="card" style="width: 18rem;">
+          <div class="card" style="width: 18rem;height:16rem;">
             <div class="icon-circle">
               <i class="bi bi-mortarboard-fill" style="font-size: 4rem; color: #00CED1;"></i>
             </div>
             <h3>Aspire to inspire</h3>
-            <p>Your success is our top priority. Gather your desired skill set, and you can become a mentor too</p>
+            <div class="card-body">
+            <p class="card-text"> Your success is our top priority. Gather your desired skill set, and you can become a mentor too</p>
+          </div>
           </div>
         </div>
       </div>
@@ -133,4 +137,5 @@ export default {
 .card-body {
   margin-top: 10px;
 }
+
 </style>

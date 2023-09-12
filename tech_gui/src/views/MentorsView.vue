@@ -16,40 +16,37 @@
         <option value="after12">After 12:00:00</option>
       </select>
     </div>
-    <div v-if="filteredMentors.length > 0">
-      <div class="row">
-        <div v-for="mentor in filteredMentors" :key="mentor.mentorID" class="col-md-4 mb-4">
-          <div class="card" style="width: 20rem;">
-            <img
-              :src="mentor.image"
-              class="card-img-top rounded-circle img-fluid"
-              alt="mentorImage"
-              style="height: 250px;"
-            />
-            <div class="card-body">
-              <h5 class="card-title">{{ mentor.firstName }} {{ mentor.lastName }}</h5>
-              <p class="card-title">{{ mentor.techField }}</p>
-              <p class="card-title">{{ mentor.techPosition }}</p>
-              <p class="card-text">
-                <i
-                  class="bi bi-quote"
-                  style="font-size: 2rem; color: #00CED1;"
-                ></i>{{ mentor.describtion }}
-              </p>
-              <p>Available on:{{ formattedAvailDate(mentor.availDate) }}</p>
-              <p>from: {{ mentor.startTime }}</p>
-              <p>TO:{{ mentor.endTime }}</p>
-              <router-link :to="{ name: 'SingleView', params: { mentorID: mentor.mentorID } }">
-                View More
-              </router-link>
-              <router-link :to="{ name: 'reservations' }">
-                <button>Make a Reservation</button>
-              </router-link>
+    <div v-if="filteredMentors.length > 0"> 
+      <div id="Testimonials" class="container">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+          <div class="col mb-4" v-for="mentor in filteredMentors" :key="mentor.mentorID">
+            <div class="card h-100">
+              <div class="card-body d-flex">
+                <div class="left-column">
+                  <img :src="mentor.image" class="img-fluid rounded-circle" loading="lazy" :alt="mentor.firstName"   style="height: 100px; width: 100px; border: 3px solid rgba(222, 227, 229, 255); object-fit: center;"
+                  /> <br>
+                  <h6 class="card-subtitle mb-2 text-muted text-center">
+                    Available on: {{ formattedAvailDate(mentor.availDate) }} 
+                    from: {{ mentor.startTime }} TO: {{ mentor.endTime }}
+                  </h6>
+                </div>
+                <div class="right-column">
+                  <h5 class="card-title">{{ mentor.firstName }} {{ mentor.lastName }}</h5>
+                  <p class="card-title">Field: {{ mentor.techField }} <br> Position: {{ mentor.techPosition }}</p>
+                  <p class="card-text"><i class="bi bi-quote"></i>{{ mentor.describtion }}</p>
+                  <router-link :to="{ name: 'SingleView', params: { mentorID: mentor.mentorID } }">
+                    <button>View More</button>
+                  </router-link>
+                  <router-link :to="{ name: 'reservations' }">
+                    <button>Reservation</button>
+                  </router-link>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+</div>      
     <div v-else class="row">
       <spinner-comp-vue />
     </div>
@@ -100,6 +97,7 @@ export default {
   async beforeMount() {
     await this.$store.dispatch('fetchMentors');
     this.techFields = [...new Set(this.mentors?.map((mentor) => mentor.techField))];
+
     this.filterMentors(); 
   },
 };
@@ -107,7 +105,7 @@ export default {
 
 <style scoped>
 .card {
-  background-color: transparent !important;
+
   border: none;
 }
 </style>
