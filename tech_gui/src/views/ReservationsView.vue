@@ -14,9 +14,6 @@
   
       <!-- Make a new reservation form -->
       <div>
-        <h2>Make a New Reservation</h2>
-        <label for="mentorID">Mentor ID:</label>
-        <input type="text" id="mentorID" v-model="mentorID" />
         <button @click="addReservation(mentorID)">Make Reservation</button>
       </div>
     </div>

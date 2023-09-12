@@ -37,9 +37,9 @@
                   <router-link :to="{ name: 'SingleView', params: { mentorID: mentor.mentorID } }">
                     <button>View More</button>
                   </router-link>
-                  <router-link :to="{ name: 'reservations' }">
-                    <button>Reservation</button>
-                  </router-link>
+                  <!-- <router-link :to="{ name: 'reservations' }"> -->
+                    <button @click="makeRes(mentor)">Reservation</button>
+                  <!-- </router-link> -->
                 </div>
               </div>
             </div>
@@ -54,6 +54,8 @@
 </template>
 
 <script>
+import { useCookies } from "vue3-cookies";
+const { cookies } = useCookies();
 import  SpinnerCompVue from '../components/SpinnerComp.vue';
 
 export default {
@@ -68,6 +70,11 @@ export default {
       },
       techFields: [],
       filteredMentors: [],
+
+      payload:{
+        mentorID:"",
+        menteeID:""
+      }
     };
   },
   computed: {
@@ -83,6 +90,13 @@ export default {
       }
       return '';
     },
+    makeRes(mentor){
+      const cookieValue = cookies.get("LegitUser");
+    const { result } = cookieValue;
+    this.payload.mentorID = mentor.mentorID,
+    this.payload.menteeID = result.menteeID
+    this.$store.dispatch('makeReservation',this.payload);
+  },
     filterMentors() {
       this.filteredMentors = this.mentors.filter((mentor) => {
         const techFieldMatch = !this.filterCriteria.techField || mentor.techField === this.filterCriteria.techField;
@@ -100,10 +114,13 @@ export default {
 
     this.filterMentors(); 
   },
+
 };
 </script>
 
 <style scoped>
+
+
 .card {
 
   border: none;

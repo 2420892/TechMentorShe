@@ -290,18 +290,6 @@ try{
   context.commit("setMsg","An error has occured")
 }
   },
-  // async addReservation({ commit }, { menteeID, mentorID }) {
-  //   try {
-  //     const response = await axios.post(`/mentee/${menteeID}/reservation`, { menteeID, mentorID });
-  //     if (response.status === 200) {
-  //       commit('addReservation', response.data);
-  //     } else {
-  //       // Handle other response statuses or errors
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // },
   async removeReservation({ commit }, { menteeID, resID }) {
     try {
       await axios.delete(`/mentee/${menteeID}/reservation/${resID}`);
@@ -316,6 +304,34 @@ try{
     cookies.remove("ActualMentor");
     context.commit("setMentee");
     cookies.remove("ActualMentee");
+  },
+
+ 
+  async makeReservation(context, payload) {
+    try {
+      const { msg, token, result } = (await axios.post(`${api}/reservation`, payload)).data;
+      cookies.set("LegitUser", { msg, token, result });
+      authUser.applyToken(token);
+      if (result) {
+        Swal.fire({
+          title: "Success",
+          text: "Reservation booked",
+          icon: "success",
+          timer: 4000,
+        });
+        context.dispatch("fetchReservations");
+        router.push("/reservations");
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: msg,
+          icon: "error",
+          timer: 4000
+        });
+      }
+    } catch (e) {
+      context.commit("setMsg", "An error has occurred");
+    }
   },
 
   },
