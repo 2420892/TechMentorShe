@@ -15,26 +15,24 @@ class reservations{
             });
         });
     }
-    addReservations(req, res) {
-        const {  menteeID, mentorID } = req.body;
+ addReservations(req, res) {
+        const data = req.body;
         const query = `
-            INSERT INTO reservations ( menteeID, mentorID)
-            VALUES (?, ?);
+        INSERT INTO reservations 
+        SET ?;
         `;
-    
-        db.query(query, [menteeID, mentorID], (err) => {
+        db.query(query, [data], (err) => {
             if (err) {
-                console.error(err);
-                res.status(500).json({
+                console.error("Error registering favourite :", err);
+                return res.status(500).json({
                     status: 500,
-                    error: "An error occurred while making the reservation."
-                });
-            } else {
-                res.json({
-                    status: 200,
-                    msg: "Reservation made successfully."
+                    error: "Failed to make reservation "
                 });
             }
+            res.json({
+                status: res.statusCode,
+                msg: "favourite  registered successfully"
+            });
         });
     }
     updateReservations(req, res) {
