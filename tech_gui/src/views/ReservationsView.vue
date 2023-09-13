@@ -89,8 +89,12 @@ mID(){
   },
   methods: {
     deleteReservation(resID) {
+      const payload = {
+        menteeID: this.mID, 
+        resID
+      }
       this.$store
-        .dispatch('deleteReservation', { menteeID: this.mID, resID })
+        .dispatch('deleteReservation', payload)
         .then(() => {
           this.$store.dispatch('fetchReservations', this.mID);
         })

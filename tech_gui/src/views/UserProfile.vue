@@ -1,20 +1,18 @@
 <template>
     <div class="profile">
-<SignupMentor/>
+<button @click="logOut">logout</button>
     </div>
 </template>
 
 <script>
-import SpinnerCompVue from '../components/SpinnerComp.vue';
-import SignupMentor from '@/components/SignupMentor.vue';
-import SignupMentee from '@/components/SignupMentee.vue';
+
 export default {
-  components: {
-    SpinnerCompVue,
-    SignupMentor,
-    SignupMentee
-  }
-    }
+  methods: {
+logOut(){
+  this.$store.dispatch("logOut")
+}
+    }}
+
 </script>
 
 <style scoped>

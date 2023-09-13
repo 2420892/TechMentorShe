@@ -48,7 +48,7 @@
               <router-link to="/contact"><i class="bi bi-person-lines-fill"></i>Contact</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/"><i class="bi bi-person-lines-fill"></i>logout</router-link>
+              <router-link to="/logout"><i class="bi bi-person-lines-fill"></i>logout</router-link>
             </li>
             <li class="nav-item">
               <router-link to="/profilelog" ><i class="bi bi-person-lines-fill"></i>profile</router-link>

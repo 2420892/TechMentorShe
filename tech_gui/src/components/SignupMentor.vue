@@ -12,41 +12,41 @@
             <form @submit.prevent="register">
 
               <div class="mb-4">
-                  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your firstName" v-model="form.firstName">
+                  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your firstName" v-model="form.firstName" required>
                 </div>
                 <div class="mb-4">
-                  <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="Your lastName" v-model="form.lastName">
+                  <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="Your lastName" v-model="form.lastName" required>
                 </div>
                 <div class="mb-4">
-                  <input type="email" class="form-control" id="exampleFormControlInput3" placeholder="name@example.com" v-model="form.emailAdd">
+                  <input type="email" class="form-control" id="exampleFormControlInput3" placeholder="name@example.com" v-model="form.emailAdd" required>
                 </div>
                 <div class="mb-4">
-                  <input type="password" class="form-control" id="exampleFormControlInput4" placeholder="Enter your Password" v-model="form.mentorPass">
+                  <input type="password" class="form-control" id="exampleFormControlInput4" placeholder="Enter your Password" v-model="form.mentorPass" required>
                 </div>
                 <div class="mb-4">
-                  <input type="text" class="form-control" id="exampleFormControlInput5" placeholder="Your tech field" v-model="form.techField">
+                  <input type="text" class="form-control" id="exampleFormControlInput5" placeholder="Your tech field" v-model="form.techField" required>
                 </div>
                 <div class="mb-4">
-                  <input type="text" class="form-control" id="exampleFormControlInput6" placeholder="Your Age" v-model="form.mentorAge">
+                  <input type="number" class="form-control" id="exampleFormControlInput6" placeholder="Your Age" v-model="form.mentorAge" required>
                 </div>
                 <div class="mb-4">
-                  <input type="text" class="form-control" id="exampleFormControlInput7" placeholder="Your current position" v-model="form.techPosition">
+                  <input type="text" class="form-control" id="exampleFormControlInput7" placeholder="Your current position" v-model="form.techPosition" required>
                 </div>
                 <div class="mb-4">
                   <label for="exampleFormControlTextarea1" class="form-label"> Career Desciption:</label>
-                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" v-model="form.describtion"></textarea>
+                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" v-model="form.describtion" required></textarea>
                 </div>
                 <div class="mb-4">
-                  <input type="date" class="form-control" id="exampleFormControlInput8" placeholder="available on this date" v-model="form.availDate">
+                  <input type="date" class="form-control" id="exampleFormControlInput8" placeholder="available on this date" v-model="form.availDate" required>
                 </div>
                 <div class="mb-4">
-                  <input type="time" class="form-control" id="exampleFormControlInput9" placeholder="Your tech field" v-model="form.startTime">
+                  <input type="time" class="form-control" id="exampleFormControlInput9" placeholder="Your tech field" v-model="form.startTime" required>
                 </div>
                 <div class="mb-4">
-                  <input type="time" class="form-control" id="exampleFormControlInput10" placeholder="Your tech field" v-model="form.endTime">
+                  <input type="time" class="form-control" id="exampleFormControlInput10" placeholder="Your tech field" v-model="form.endTime" required>
                 </div>
                 <div class="mb-4">
-                  <input type="text" class="form-control" id="exampleFormControlInput11" placeholder="Your tech field" v-model="form.image">
+                  <input type="text" class="form-control" id="exampleFormControlInput11" placeholder="Your tech field" v-model="form.image" required>
                 </div>
               <div class="form-check d-flex justify-content-center mb-5">
                 <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />

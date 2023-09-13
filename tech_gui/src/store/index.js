@@ -212,7 +212,7 @@ if(res.status === 200){
           icon: "success",
           timer: 2000
         });
-        router.push("/");
+        router.push("/mentors");
       } else {
         Swal.fire({
           title: msg,
@@ -241,7 +241,7 @@ if(res.status === 200){
           icon: "success",
           timer: 2000
         });
-        router.push("/");
+        router.push("/mentors");
       } else {
         Swal.fire({
           title: msg,
@@ -292,10 +292,10 @@ try{
   context.commit("setMsg","An error has occured")
 }
   },
-  async deleteReservation({ commit }, { menteeID, resID }) {
+  async deleteReservation({ commit }, payload) {
     try {
-      const res = await axios.delete(`${api}/mentee/${menteeID}/reservation/${resID}`);
-      if(res.status==200){
+      const {msg} = (await axios.delete(`${api}/mentee/${payload.menteeID}/reservation/${payload.resID}`)).data;
+      if(msg){
         Swal.fire({
           icon: "success",
           title: "reservation Deleted",
@@ -316,9 +316,9 @@ try{
   // logout
   async logOut(context) {
     context.commit("setMentor");
-    cookies.remove("ActualMentor");
+    cookies.remove("AuthMentor");
     context.commit("setMentee");
-    cookies.remove("ActualMentee");
+    cookies.remove("LegitUser");
   },
 
  
