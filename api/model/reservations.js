@@ -49,20 +49,19 @@ class reservations{
             });
         });
     }
-    deleteReservation(req,res){
-        const query = `
+  deleteReservation(req, res, resID) {
+    const query = `
         DELETE FROM reservations
-        WHERE resID = ${req.params.resID};
+        WHERE resID = ${resID};
         `;
-        db.query(query,(err)=>{
-            if (err){
-                res.end(err)
-            }
-            res.json({
-                status:res.statusCode,
-                msg: "A  record was deleted."
-            });
+    db.query(query,(err)=>{
+        if (err){
+            res.end(err)
+        }
+        res.status(200).json({
+            msg: "A  record was deleted."
         });
-    }
+    });
+}
 }
 module.exports =reservations
