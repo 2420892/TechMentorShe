@@ -16,6 +16,11 @@
         <option value="after12">After 12:00:00</option>
       </select>
     </div>
+    <div>
+      <label for="mentorNameFilter">Search by Mentor Name:</label>
+      <input type="text" id="mentorNameFilter" v-model="filterCriteria.mentorName" @input="filterMentors" />
+      <button @click="sortByName">Sort by Age</button>
+    </div>
     <div v-if="filteredMentors.length > 0"> 
       <div id="Testimonials" class="container">
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
@@ -67,6 +72,7 @@ export default {
       filterCriteria: {
         techField: '',
         availability: '',
+        mentorName: '',
       },
       techFields: [],
       filteredMentors: [],
@@ -103,10 +109,23 @@ export default {
         const availabilityMatch = !this.filterCriteria.availability || 
           (this.filterCriteria.availability === 'before12' && mentor.startTime < '12:00:00') ||
           (this.filterCriteria.availability === 'after12' && mentor.startTime >= '12:00:00');
-
-        return techFieldMatch && availabilityMatch;
+          const mentorNameMatch =
+      !this.filterCriteria.mentorName ||
+      (mentor.firstName + ' ' + mentor.lastName).toLowerCase().includes(this.filterCriteria.mentorName.toLowerCase());
+    
+      return techFieldMatch && availabilityMatch && mentorNameMatch;
       });
     },
+    sortByName() {
+  this.filteredMentors.sort((a, b) => {
+    const mentorAgeA = new Date(a.mentorAge);
+    const mentorAgeB = new Date(b.mentorAge);
+
+    return mentorAgeA - mentorAgeB;
+  });
+},
+
+
   },
   async beforeMount() {
     await this.$store.dispatch('fetchMentors');
