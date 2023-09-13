@@ -77,4 +77,5 @@ class reservations{
         });
     });
 }
+}
 module.exports =reservations
