@@ -49,10 +49,10 @@ class reservations{
             });
         });
     }
-  deleteReservation(req, res, resID) {
+  deleteReservation(req, res) {
     const query = `
         DELETE FROM reservations
-        WHERE resID = ${resID};
+        WHERE resID = ${req.params.resID};
         `;
     db.query(query,(err)=>{
         if (err){
@@ -63,5 +63,18 @@ class reservations{
         });
     });
 }
+    deleteReservations(req,res){
+        const query = `
+        TRUNCATE TABLE reservations
+        ;
+        `;
+    db.query(query,(err)=>{
+        if (err){
+            res.end(err)
+        }
+        res.status(200).json({
+            msg: "A  record was deleted."
+        });
+    });
 }
 module.exports =reservations
