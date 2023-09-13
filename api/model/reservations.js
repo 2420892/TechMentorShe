@@ -55,7 +55,9 @@ class reservations{
         WHERE resID = ${req.params.resID};
         `;
         db.query(query,(err)=>{
-            if (err) throw err
+            if (err){
+                res.end(err)
+            }
             res.json({
                 status:res.statusCode,
                 msg: "A  record was deleted."
