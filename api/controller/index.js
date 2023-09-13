@@ -83,7 +83,7 @@ routes.patch('mentee/:id/reservation/:id', bodyParser.json(), (req, res) => {
 routes.delete('mentee/:id/reservation', (req, res) => {
    reservations.deleteReservations(req, res);
 });
-routes.delete('mentee/:id/reservation/:id', (req, res) => {
+routes.delete('mentee/:menteeID/reservation/:resID', (req, res) => {
     reservations.deleteReservation(req, res);
  });
  
