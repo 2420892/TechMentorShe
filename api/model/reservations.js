@@ -52,7 +52,7 @@ class reservations{
     deleteReservation(req,res){
         const query = `
         DELETE FROM reservations
-        WHERE resID =${req.params.id} AND menteeID =${req.params.id};
+        WHERE menteeID =${req.params.menteeID} AND resID = ${req.params.resID};
         `;
         db.query(query,(err)=>{
             if (err) throw err
