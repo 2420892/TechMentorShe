@@ -26,8 +26,8 @@
               <router-link to="/mentors"><i class="bi bi-mortarboard-fill"></i>OurMentors</router-link>
             </li>
           
-            <li class="nav-item" v-if="isMentee || isMentor">
-              <router-link to="/reservations"><i class="bi bi-motherboard-fill"></i>Reservations</router-link>
+            <li class="nav-item" >
+              <router-link to="/reservations" v-show="isMentee"><i class="bi bi-motherboard-fill"></i>Reservations</router-link>
               <!-- I should hide this to non-users -->
             </li>
             <li class="nav-item dropdown">
@@ -61,16 +61,30 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { useCookies } from "vue3-cookies"
+const {cookies} = useCookies()
+
 
 export default {
   computed: {
-    ...mapState(['mentor', 'mentee']),
+   
+    mentee(){
+  return this.$store.state.mentee || cookies.get("LegitUser")
+
+},
+result(){
+  if (this.mentee?.result?.length) {
+    return this.mentee?.result
+  } else {
+    return cookies.get("LegitUser")?.result 
+   }
+},
     isMentor() {
-      return this.mentor !== null;
+      return this.result?.role?.toLowerCase() == "mentor";
     },
     isMentee() {
-      return this.mentee !== null;
+  
+      return this.result?.menteeRole?.toLowerCase() == "mentee";
     },
     isAdmin() {
       // Add logic to check if the user is an admin

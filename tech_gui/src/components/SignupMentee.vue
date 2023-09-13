@@ -27,6 +27,9 @@
                     <input type="text" class="form-control" id="exampleFormControlInput5" placeholder="Your Age" v-model="form.menteeAge">
                   </div>
                   <div class="mb-4">
+                    <input type="text" class="form-control" id="exampleFormControlInput6" placeholder="Your role" v-model="form.menteeRole">
+                  </div>
+                  <div class="mb-4">
                     <input type="text" class="form-control" id="exampleFormControlInput11" placeholder="Image url" v-model="form.image">
                   </div>
                 <div class="form-check d-flex justify-content-center mb-5">

@@ -44,7 +44,7 @@ export default createStore({
     addReservation(state, reservation) {
       state.reservations.push(reservation);
     },
-    removeReservation(state, resID) {
+    deleteReservation(state, resID) {
       state.reservations = state.reservations.filter((reservation) => reservation.resID !== resID);
     },
   }, 
@@ -257,8 +257,10 @@ if(res.status === 200){
   // reservations
   async fetchReservations({ commit }, menteeID) {
     try {
-      const response = await axios.get(`/mentee/${menteeID}/reservations`);
-      commit('setReservations', response.data.results);
+      const {data}= await axios.get(`${api}/mentee/${menteeID}/reservations`);
+    
+      commit('setReservations', data.results);
+   
     } catch (error) {
       console.error(error);
     }
@@ -267,7 +269,7 @@ if(res.status === 200){
 try{
   const {msg ,token,result} = (await axios.post(`${api}/reservation`,payload)).data;
   if (result) {
-    cookies.set("setMentor", { msg, token, result });
+   
     authenticateUser.applyToken(token);
     sweet({
       title: "msg",
@@ -290,10 +292,23 @@ try{
   context.commit("setMsg","An error has occured")
 }
   },
-  async removeReservation({ commit }, { menteeID, resID }) {
+  async deleteReservation({ commit }, { menteeID, resID }) {
     try {
-      await axios.delete(`/mentee/${menteeID}/reservation/${resID}`);
-      commit('removeReservation', resID);
+      const res = await axios.delete(`${api}/mentee/${menteeID}/reservation/${resID}`);
+      if(res.status==200){
+        Swal.fire({
+          icon: "success",
+          title: "reservation Deleted",
+          text: "The reservation has been successfully deleted.",
+        })
+      }else {
+        Swal.fire({
+          icon: "error",
+          title: "Deletion Failed",
+          text: "An error occurred during reservation deletion.",
+        });
+      }
+      // commit('deleteReservation', resID);
     } catch (error) {
       console.error(error);
     }
@@ -309,9 +324,10 @@ try{
  
   async makeReservation(context, payload) {
     try {
-      const { msg, token, result } = (await axios.post(`${api}/reservation`, payload)).data;
-      cookies.set("LegitUser", { msg, token, result });
+      const response = await axios.post(`${api}/reservation`, payload);
+      const { msg, result, token } = response.data; 
       authUser.applyToken(token);
+  
       if (result) {
         Swal.fire({
           title: "Success",
@@ -330,9 +346,11 @@ try{
         });
       }
     } catch (e) {
+      console.error("An error occurred:", e);
       context.commit("setMsg", "An error has occurred");
     }
   },
+  
 
   },
   modules: {}

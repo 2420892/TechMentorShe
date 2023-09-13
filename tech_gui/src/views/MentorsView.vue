@@ -38,7 +38,7 @@
                     <button>View More</button>
                   </router-link>
                   <!-- <router-link :to="{ name: 'reservations' }"> -->
-                    <button @click="makeRes(mentor)">Reservation</button>
+                    <button @click="makeRes(mentor)"> Add to wishlist</button>
                   <!-- </router-link> -->
                 </div>
               </div>
