@@ -54,7 +54,7 @@ class reservations{
         DELETE FROM reservations  r
         INNER JOIN mentors a 
         ON r.mentorID=a.mentorID
-        WHERE menteeID =${req.params.menteeID} AND resID = ${req.params.resID};
+        WHERE r.menteeID =${req.params.menteeID} AND r.resID = ${req.params.resID};
         `;
         db.query(query,(err)=>{
             if (err) throw err
