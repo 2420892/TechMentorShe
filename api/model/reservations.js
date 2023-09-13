@@ -51,7 +51,7 @@ class reservations{
     }
     deleteReservation(req,res){
         const query = `
-        DELETE FROM Reservations
+        DELETE FROM reservations
         WHERE resID =${req.params.id};
         `;
         db.query(query,(err)=>{
