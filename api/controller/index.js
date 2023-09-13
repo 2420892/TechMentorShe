@@ -84,7 +84,7 @@ routes.delete('mentee/:id/reservation', (req, res) => {
    reservations.deleteReservations(req, res);
 });
 routes.delete('mentee/:id/reservation/:id', (req, res) => {
-    reservations.deleteReservations(req, res);
+    reservations.deleteReservation(req, res);
  });
  
 
