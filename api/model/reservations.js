@@ -51,7 +51,9 @@ class reservations{
     }
     deleteReservation(req,res){
         const query = `
-        DELETE FROM reservations
+        DELETE FROM reservations  r
+        INNER JOIN mentors a 
+        ON r.mentorID=a.mentorID
         WHERE menteeID =${req.params.menteeID} AND resID = ${req.params.resID};
         `;
         db.query(query,(err)=>{
