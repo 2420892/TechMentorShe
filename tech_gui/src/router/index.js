@@ -26,11 +26,11 @@ const routes = [
     path: '/mentors',
     name: 'mentors',
     component: () => import('../views/MentorsView.vue'),
-    beforeEnter() {
-      if (!cookies.get("LegitUser")) {
-        router.push({ name: "LogIn" });
-      }
-    },
+    // beforeEnter() {
+    //   if (!cookies.get("LegitUser"||"LegitMentor")) {
+    //     router.push({ name: "LogIn" });
+    //   }
+    // },
   },
   {
     
@@ -56,27 +56,27 @@ const routes = [
       if (!cookies.get("LegitUser")) {
         router.push({ name: "LogIn" });
       }
-    },
+    }
   },
-  {
-    path: '/logout',
-    name: 'logout',
-    component: () => import( '../views/UserProfile.vue'),
-    beforeEnter() {
-      if (!cookies.get("LegitUser")) {
-        router.push({ name: "LogIn" });
-      }
-    },
-  },
+  // {
+  //   path: '/logout',
+  //   name: 'logout',
+  //   component: () => import( '../views/UserProfile.vue'),
+  //   beforeEnter() {
+  //     if (!cookies.get("LegitUser")) {
+  //       router.push({ name: "LogIn" });
+  //     }
+  //   },
+  // },
   {
     path: '/profilelog',
     name: 'profilelog',
     component: () => import( '../views/ProfileView.vue'),
-    beforeEnter() {
-      if (!cookies.get("LegitUser")) {
-        router.push({ name: "LogIn" });
-      }
-    },
+    // beforeEnter() {
+    //   if (!cookies.get("LegitUser")) {
+    //     router.push({ name: "LogIn" });
+    //   }
+    // },
   },
   {
     path: '/SignupMentee',

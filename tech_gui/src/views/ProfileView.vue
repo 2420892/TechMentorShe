@@ -16,43 +16,49 @@
               <p class="card-text">Mentee Surname: {{ mentee.lastName }}</p>
               <p class="card-text">Mentee Age: {{ mentee.menteeAge }}</p>
               <p class="card-text">Mentee Email: {{ mentee.emailAdd }}</p>
-              <button @click="showUpdateModal" class="btn btn-primary">Edit Profile</button>
+              <button class="btn btn-secondary" @click="editMentee(mentee)">Edit</button>
               <button @click="deleteMentee(mentee?.menteeID)" class="btn btn-danger">Delete Account</button>
               
             </div>
           </div>
         </div>
       </div>
-      <b-modal v-model="isUpdateModalVisible" title="Update Mentee Profile">
+      <div v-if="showEditModal" class="modal-overlay">
+        <div class="modal-content">
+        <h3>Edit user</h3>
         <form @submit.prevent="updateMentee">
-          <div class="form-group">
-            <label for="firstName">First Name:</label>
-            <input v-model="updatedMentee.firstName" type="text" id="firstName" class="form-control" />
+          <div>
+            <spinner-comp v-if="isLoadingUpdate"  />
           </div>
-  
-          <div class="form-group">
-            <label for="lastName">Last Name:</label>
-            <input v-model="updatedMentee.lastName" type="text" id="lastName" class="form-control" />
+          <div class="mb-3">
+          <label for="editName">firstName:</label>
+          <input type="text" id="editName" v-model="editMenteeData.firstName" required>
+        </div>
+        <div class="mb-3">
+          <label for="editlastName">lastName:</label>
+          <input type="text" id="editlastName" v-model="editMenteeData.lastName" required>
+        </div>
+        <div class="mb-3">
+          <label for="editgender">Age:</label>
+          <input type="number" id="editage" v-model="editMenteeData.menteeAge" required>
           </div>
-  
-          <div class="form-group">
-            <label for="menteeAge">Age:</label>
-            <input v-model="updatedMentee.menteeAge" type="number" id="menteeAge" class="form-control" />
+          <div class="mb-3">
+          <label for="editemailAdd:">emailAdd:</label> 
+          <input type="text" id="editemailAdd" v-model="editMenteeData.emailAdd" required>
           </div>
-  
-          <div class="form-group">
-            <label for="menteeRole">Role:</label>
-            <input v-model="updatedMentee.menteeRole" type="text" id="menteeRole" class="form-control" />
+          <div class="mb-3">
+          <label for="edituserPassword">userPassword:</label>
+          <input type="password" id="edituserPassword" v-model="editMenteeData.menteePass" required>
           </div>
-  
-          <div class="form-group">
-            <label for="emailAdd">Email:</label>
-            <input v-model="updatedMentee.emailAdd" type="email" id="emailAdd" class="form-control" />
-          </div>
-  
-          <button type="submit" class="btn btn-primary">Save Changes</button>
+          <div class="mb-3">
+            <label for="editprofileUrl">profileUrl:</label>
+            <input type="text" id="editprofileUrl" v-model="editMenteeData.image" required>
+            </div>
+          <button class="btn btn-primary" type="submit" :disabled="isLoading">Update</button>
+          <button class="btn btn-secondary" @click="showEditModal = false" :disabled="isLoading">Cancel</button>
         </form>
-      </b-modal>
+        </div>
+      </div>
 
     <!-- Mentor Profile Card -->
 
@@ -71,9 +77,58 @@
               <p class="card-text">Metor Field: {{ mentor.techField}}</p>
               <p class="card-text">current Position: {{ mentor.techPosition}}</p>
               <p class="card-text">Mentor Bio: {{ mentor.describtion }}</p>
+              <button class="btn btn-secondary" @click="editMentor(mentor)">Edit</button>
               <button @click="deleteMentor(mentor.mentorID)" class="btn btn-danger">Delete Account</button>
             </div>
           </div>
+        </div>
+      </div>
+      <div v-if="showEditModal2" class="modal-over">
+        <div class="modal-content">
+        <h3>Edit Mentor</h3>
+        <form @submit.prevent="updateMentor">
+          <div>
+            <spinner-comp v-if="isLoadingUpdate2" />
+          </div>
+          <div class="mb-3">
+          <label for="editName">Name:</label>
+          <input type="text" id="editName" v-model="editMentorData.firstName" required>
+        </div>
+        <div class="mb-3">
+          <label for="editAmount">lastName:</label>
+          <input type="text" id="editAmount" v-model="editMentorData.lastName" required>
+        </div>
+        <div class="mb-3">
+          <label for="editCategory">Age:</label>
+          <input type="number" id="editCategory" v-model="editMentorData.mentorAge" required>
+          </div>
+          <div class="mb-3">
+            <label for="editDescription">emailAdd:</label>
+            <input type="text" id="editDescription" v-model="editMentorData.emailAdd" required>
+            </div>
+            <div class="mb-3">
+              <label for="editDescription">password:</label>
+              <input type="text" id="editDescription" v-model="editMentorData.mentorPass" required>
+              </div>
+          <div class="mb-3">
+            <label for="editDescription">tech field:</label>
+            <input type="text" id="editDescription" v-model="editMentorData.techField" required>
+            </div>
+          <div class="mb-3">
+          <label for="editGender">current position:</label>
+          <input type="text" id="editGender" v-model="editMentorData.techPosition" required>
+          </div>
+          <div class="mb-3">
+            <label for="editGender">career bio:</label>
+            <input type="text" id="editGender" v-model="editMentorData.describtion" required>
+            </div>
+          <div class="mb-3">
+          <label for="editImage">Image URL:</label>
+          <input type="text" id="editImage" v-model="editMentorData.image" required>
+          </div>
+          <button class="btn btn-primary" type="submit" :disabled="isLoadingUpdate2">Update</button>
+          <button class="btn btn-secondary" @click="showEditModal2 = false" :disabled="isLoadingUpdate2">Cancel</button>
+        </form>
         </div>
       </div>
     </div>
@@ -82,73 +137,101 @@
 
 <script>
 import { useCookies } from "vue3-cookies"
-const {cookies} = useCookies()
+const { cookies } = useCookies()
 import LogOut from "@/components/LogOut.vue";
+import SpinnerComp from "@/components/SpinnerComp.vue";
 export default {
-  components:{
-LogOut,
+  components: {
+    LogOut,
+    SpinnerComp,
   },
   data() {
     return {
       isUpdateModalVisible: false,
-      updatedMentee: {
+      isLoadingUpdate2:false,
+      showEditModal: false, 
+      showEditModal2:false,
+      editMenteeData: {
+        menteeID: null,
         firstName: '',
         lastName: '',
-        menteeAge: null,
-        menteeRole: '',
+        menteeAge: '',
         emailAdd: '',
+        menteePass: '',
+        image: ''
       },
+      isLoadingUpdate: false,
+      editMentorData:{
+        mentorID: null, 
+        firstName: '',
+        lastName:'',
+        mentorAge:'',
+        emailAdd:'',
+        mentorPass:'',
+        techField:'',
+        describtion:'',
+        techPosition:'',
+        image:''
+      },
+      isLoadingUpdate2:false
     };
   },
   computed: {
-    // mentor(){
-    //   return this.$store.state.mentor
-    // },
-    mentee(){
-  return this.$store.state.mentee || cookies.get("LegitUser")
-
-},
-mID(){
-  if (this.mentee?.result?.length) {
-    return this.mentee?.result.menteeID
-  } else {
-    return cookies.get("LegitUser")?.result.menteeID
-  }
-}
+    mentee() {
+      return this.$store.state.mentee || cookies.get("LegitUser");
+    },
+    mentor() {
+      return this.$store.state.mentor || cookies.get("LegitMentor");
+    },
+  
   },
   mounted() {
     this.$store.dispatch('fetchMentee');
-    this.$store.dispatch('fetchMentor')
+    this.$store.dispatch('fetchMentor');
   },
-  methods:{
-// In your store
-showUpdateModal() {
-      // Initialize the updatedMentee object with the current mentee data
-      this.updatedMentee = { ...this.mentee };
-      this.isUpdateModalVisible = true;
+  methods: {
+    async editMentee(mentee) {
+      this.isLoadingUpdate = true;
+      this.editMenteeData = { ...mentee };
+      this.isLoadingUpdate = false;
+      this.showEditModal = true; 
     },
-    updateMentee() {
-      this.$store
-        .dispatch('updateMentee', this.updatedMentee)
-        .then(() => {
-          this.isUpdateModalVisible = false; // Close the modal on success
-          // Handle success, show a success message, or redirect to another page.
-        })
-        .catch((error) => {
-          // Handle error, show an error message, or log the error.
-        });
+    async updateMentee() {
+      this.isLoadingUpdate = true;
+      try {
+        await this.$store.dispatch('updateMentee', this.editMenteeData);
+      } catch (error) {
+        console.error('Update user error:', error);
+      }
+      this.isLoadingUpdate = false;
+      this.showEditModal = false; 
     },
-  },
+    deleteMentee(menteeID) {
+      this.$store.dispatch('deleteMentee', menteeID);
+      window.location.reload();
+    },
 
-,
-deleteMentee(menteeID) {
-  this.$store.dispatch('deleteMentee', menteeID);
-  window.location.reload();
-},
-deleteMentor(mentorID){
-  this.$store.dispatch('deleteMentor',mentorID);
-  window.location.reload();
-}
+    async editMentor(mentor) {
+      this.isLoadingUpdate2 = true;
+      this.editMentorData = { ...mentor }; // Assign mentor data to editMentorData
+      this.isLoadingUpdate2 = false;
+      this.showEditModal2 = true; 
+    },
+    
+    async updateMentor() {
+      this.isLoadingUpdate2 = true;
+      try {
+        await this.$store.dispatch('updateMentor', this.editMentorData);
+      } catch (error) {
+        console.error('Update mentor error:', error);
+      }
+      this.isLoadingUpdate2 = false;
+      this.showEditModal2 = false; 
+    },
+    deleteMentor(mentorID) {
+      this.$store.dispatch('deleteMentor', mentorID);
+      window.location.reload();
+    }
   }
 };
 </script>
@@ -156,7 +239,12 @@ deleteMentor(mentorID){
 <style scoped>
 .logout-button {
   position: absolute;
-  top:60px;
-  right: 10px; 
+  top: 60px;
+  right: 10px;
 }
+
+.modal-overlay {
+}
+
+
 </style>

@@ -28,6 +28,7 @@ export default createStore({
     setMentee(state, mentee) {
       state.mentee = mentee;
     },
+  
     setMentors(state, mentors) {
       state.mentors = mentors;
     },
@@ -178,17 +179,37 @@ export default createStore({
    
   },
  // In your store
- updateMentee({ commit }, mentee) {
-  return axios
-    .put(`${api}/mentee/${mentee.menteeID}`, mentee)
-    .then((response) => {
-      commit('setMentee', response.data); // Update the mentee data in the store
-      return response.data;
-    })
-    .catch((error) => {
-      console.error('Error updating mentee:', error);
-      throw error;
-    });
+ async updateMentee(context, editMenteeData) {
+  try {
+    let { msg } = (await axios.put(`${api}/mentee/${editMenteeData.menteeID}`, editMenteeData)).data;
+    if (msg) {
+      context.dispatch('fetchMentee');
+      context.commit('setMentee', editMenteeData);
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: msg,
+      });
+    }
+  } catch (error) {
+    console.error(error);
+  }
+},
+async updateMentor(context, editMentorData) {
+  try {
+    let { msg } = (await axios.patch(`${api}/mentor/${editMentorData.mentorID}`, editMentorData)).data;
+    if (msg) {
+      context.dispatch('fetchMentor');
+      context.commit('setMentor', editMentorData);
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: msg,
+      });
+    }
+  } catch (error) {
+    console.error(error);
+  }
 },
 // ...
 
@@ -304,7 +325,7 @@ try{
           text: "An error occurred during reservation deletion.",
         });
       }
-      // commit('deleteReservation', resID);
+     
     } catch (error) {
       console.error(error);
     }
@@ -325,7 +346,7 @@ try{
           text: "An error occurred during reservation deletion.",
         });
       }
-      // commit('deleteReservation', resID);
+   
     } catch (error) {
       console.error(error);
     }
@@ -333,7 +354,7 @@ try{
   // logout
   async logOut(context) {
     context.commit("setMentor");
-    cookies.remove("AuthMentor");
+    cookies.remove("LegitMentor");
     context.commit("setMentee");
     cookies.remove("LegitUser");
   },
