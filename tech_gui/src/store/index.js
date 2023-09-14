@@ -199,8 +199,8 @@ async updateMentor(context, editMentorData) {
   try {
     let { msg } = (await axios.patch(`${api}/mentor/${editMentorData.mentorID}`, editMentorData)).data;
     if (msg) {
-      context.dispatch('fetchMentor');
-      context.commit('setMentor', editMentorData);
+      context.dispatch('fetchMentors');
+      // context.commit('setMentor', editMentorData);
       Swal.fire({
         icon: 'success',
         title: 'Success',

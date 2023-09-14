@@ -127,6 +127,11 @@ export default {
   background-size: 100% auto;
   background-position: center center;
 }
+#second h2{
+  animation:fadeInDown;
+  animation-duration: 2s;
+  animation-iteration-count: infinite; 
+}
 
 .icon-circle {
   display: flex;

@@ -22,3 +22,7 @@
 .nav-item{
     margin-inline: .4rem;
 }
+button:hover{
+    animation: pulse;
+    animation-duration: 2s;
+  }

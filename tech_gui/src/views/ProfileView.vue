@@ -122,6 +122,19 @@
             <label for="editGender">career bio:</label>
             <input type="text" id="editGender" v-model="editMentorData.describtion" required>
             </div>
+            <div class="mb-3">
+              <label for="editGender">available date:</label>
+  
+      <input type="date" id="editGender" v-model="editMentorData.availDate" required>
+              </div>
+              <div class="mb-3">
+                <label for="editGender">startTime:</label>
+                <input type="time" id="editGender" v-model="editMentorData.startTime" required>
+                </div>
+                <div class="mb-3">
+                  <label for="editGender">end time:</label>
+                  <input type="time" id="editGender" v-model="editMentorData.endTime" required>
+                  </div>
           <div class="mb-3">
           <label for="editImage">Image URL:</label>
           <input type="text" id="editImage" v-model="editMentorData.image" required>
@@ -171,7 +184,10 @@ export default {
         techField:'',
         describtion:'',
         techPosition:'',
-        image:''
+        image:'',
+        availDate:'',
+        startTime:'',
+        endTime:''
       },
       isLoadingUpdate2:false
     };
@@ -183,23 +199,30 @@ export default {
     mentor() {
       return this.$store.state.mentor || cookies.get("LegitMentor");
     },
+    formattedAvailDate() {
+    if (this.editMentorData.availDate) {
+      const date = new Date(this.editMentorData.availDate);
+      return date.toLocaleDateString(); 
+    }
+    return '';
+  },
   
   },
   mounted() {
     this.$store.dispatch('fetchMentee');
-    this.$store.dispatch('fetchMentor');
+    this.$store.dispatch('fetchMentors');
   },
   methods: {
-    async editMentee(mentee) {
+     editMentee(mentee) {
       this.isLoadingUpdate = true;
       this.editMenteeData = { ...mentee };
       this.isLoadingUpdate = false;
       this.showEditModal = true; 
     },
-    async updateMentee() {
+     updateMentee() {
       this.isLoadingUpdate = true;
       try {
-        await this.$store.dispatch('updateMentee', this.editMenteeData);
+       this.$store.dispatch('updateMentee', this.editMenteeData);
       } catch (error) {
         console.error('Update user error:', error);
       }
@@ -211,17 +234,17 @@ export default {
       window.location.reload();
     },
 
-    async editMentor(mentor) {
+    editMentor(mentor) {
       this.isLoadingUpdate2 = true;
       this.editMentorData = { ...mentor }; // Assign mentor data to editMentorData
       this.isLoadingUpdate2 = false;
       this.showEditModal2 = true; 
     },
     
-    async updateMentor() {
+     updateMentor() {
       this.isLoadingUpdate2 = true;
       try {
-        await this.$store.dispatch('updateMentor', this.editMentorData);
+         this.$store.dispatch('updateMentor', this.editMentorData);
       } catch (error) {
         console.error('Update mentor error:', error);
       }

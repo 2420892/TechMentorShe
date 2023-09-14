@@ -2,7 +2,7 @@
   <div>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">S.Zweni</a>
+        <router-link class="navbar-brand" to="/">TMS</router-link>
         <button
           class="navbar-toggler"
           type="button"

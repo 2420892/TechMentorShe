@@ -7,23 +7,23 @@
     <div>
  
       <label for="techFieldFilter">Filter by Tech Field:</label>
-      <select id="techFieldFilter" v-model="filterCriteria.techField" @change="filterMentors">
+      <select id="techFieldFilter" v-model="filterCriteria.techField" @change="filterMentors" style="width:8rem;">
         <option value="">All</option>
         <option v-for="techField in techFields" :key="techField">{{ techField }}</option>
       </select>
     </div>
     <div>
       <label for="availabilityFilter">Filter by Availability:</label>
-      <select id="availabilityFilter" v-model="filterCriteria.availability" @change="filterMentors">
+      <select id="availabilityFilter" v-model="filterCriteria.availability" @change="filterMentors" style="width:8rem;">
         <option value="">All</option>
         <option value="before12">Before 12:00:00</option>
         <option value="after12">After 12:00:00</option>
       </select>
     </div>
     <div>
-      <label for="mentorNameFilter">Search by Mentor Name:</label>
-      <input type="text" id="mentorNameFilter" v-model="filterCriteria.mentorName" @input="filterMentors" />
-      <button @click="sortByName">Sort by Age</button>
+      <label for="mentorNameFilter">Search by Name:</label>
+      <input type="text" id="mentorNameFilter" v-model="filterCriteria.mentorName" @input="filterMentors"  style="width:7rem;"/><br>
+      <button @click="sortByName" style="width:17rem;">Sort by Age</button >
     </div>
     <div v-if="filteredMentors.length > 0"> 
       <div id="Testimonials" class="container">
@@ -147,13 +147,19 @@ export default {
 
 
 .card {
+background-color:#dfdfdf;
 
-  border: none;
+  border: 1px solid black;
 }
 .logout-button {
   position: absolute;
   top:60px;
   right: 10px; 
+}
+.right-column button{
+  margin:2px;
+  padding:2px 4px;
+
 }
 
 </style>
