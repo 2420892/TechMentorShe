@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Mentee Profile Card -->
-    <div v-if="mentee" class="container text-center"> 
+   
       <div class="card mb-3" v-for="mentee in mentee" :key="mentee.menteeID" style="max-width: 540px;">
         <div class="row g-0">
           <div class="col-md-4">
@@ -14,16 +14,16 @@
               <p class="card-text">Mentee Surname: {{ mentee.lastName }}</p>
               <p class="card-text">Mentee Age: {{ mentee.menteeAge }}</p>
               <p class="card-text">Mentee Email: {{ mentee.emailAdd }}</p>
-              <button @click="updateMentee(mentee.menteeID)" class="btn btn-primary">Update Profile</button>
+              <button @click="updateMentee(mID)" class="btn btn-primary">Update Profile</button>
               <button @click="deleteMentee(mentee.menteeID)" class="btn btn-danger">Delete Account</button>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    
 
     <!-- Mentor Profile Card -->
-    <div v-if="mentor" class="container text-center"> 
+
       <div class="card mb-3" v-for="mentor in mentor" :key="mentor.mentorID" style="max-width: 540px;">
         <div class="row g-0">
           <div class="col-md-4">
@@ -45,33 +45,58 @@
         </div>
       </div>
     </div>
-
-    <div v-else>
-      <p>User not found or not logged in.</p>
-    </div>
-  </div>
 </template>
 
 
 <script>
+import { useCookies } from "vue3-cookies"
+const {cookies} = useCookies()
 export default {
+  
   computed: {
-    mentee() {
-      return this.$store.state.mentee;
-    },
     mentor(){
       return this.$store.state.mentor
-    }
+    },
+    mentee(){
+  return this.$store.state.mentee || cookies.get("LegitUser")
+
+},
+mID(){
+  if (this.mentee?.result?.length) {
+    return this.mentee?.result.menteeID
+  } else {
+    return cookies.get("LegitUser")?.result.menteeID
+  }
+}
   },
   mounted() {
     this.$store.dispatch('fetchMentee');
     this.$store.dispatch('fetchMentor')
   },
   methods:{
-    updateMentee(menteeID) {
-  this.$store.dispatch('updateMentee', menteeID);
+// In your store
+async updateMentee({ commit }, { menteeID, updatedData }) {
+  try {
+    const res = await axios.put(`${api}/mentee/${menteeID}`, updatedData);
 
-},
+    if (res.status === 200) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Mentee updated',
+        text: 'Your information has been updated',
+      });
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Update failed',
+        text: 'An error occurred during update',
+      });
+    }
+  } catch (error) {
+    console.error('Mentee update failed:', error);
+  }
+}
+,
 deleteMentee(menteeID) {
   this.$store.dispatch('deleteMentee', menteeID);
   window.location.reload();

@@ -1,18 +1,12 @@
 <template>
   <div>
     <h1>Made Reservations</h1>
-    <!-- <ul>
-      <li > -->
-        <!-- Display reservation details here -->
-        <!-- {{ reservation.firstName }}
-        {{ reservation.availdate }} - {{ reservation.startTime }}
-        <button @click="cancelReservation(reservation)">Cancel</button>
-      </li>
-    </ul> -->
+   
     <section style="background-color: #eee;">
       <div class="container py-5">
         <div class="row justify-content-center mb-3">
           <div class="col-md-12 col-xl-10">
+            <button  @click="deleteReservations">DELETE ALL RESERVATIONS</button>
             <div class="card shadow-0 border rounded-3">
               <div class="card-body" v-for="reservation in reservations" :key="reservation.resID">
                 <div class="row">
@@ -39,9 +33,7 @@
                       <span class="text-primary"> • </span>
                     </div>
                     <p class="text-truncate mb-4 mb-md-0">
-                      There are many variations of passages of Lorem Ipsum available, but the
-                      majority have suffered alteration in some form, by injected humour, or
-                      randomised words which don't look even slightly believable.
+                     You have added this reservation to your wish list.Corfirm reservation or cancel
                     </p>
                   </div>
                   <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
@@ -95,6 +87,19 @@ mID(){
       }
       this.$store
         .dispatch('deleteReservation', payload)
+        .then(() => {
+          this.$store.dispatch('fetchReservations', this.mID);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    deleteReservations() {
+      const payload = {
+        menteeID: this.mID, 
+      }
+      this.$store
+        .dispatch('deleteReservations', payload)
         .then(() => {
           this.$store.dispatch('fetchReservations', this.mID);
         })

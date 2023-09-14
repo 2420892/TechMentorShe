@@ -176,26 +176,29 @@ export default createStore({
     }
    
   },
-  async updateMentee({commit},menteeID){
-    try{
-const res =await axios.put(`${api}/mentee/${menteeID}`);
-if(res.status === 200){
-  Swal.fire({
-    icon:'success',
-    title:"Mentee  updated",
-    text:"Your information has been updated"
-  });
-}else{
-  Swal.fire({
-    icon:"error",
-  title:"Update failed",
-  text:"An error occured during update"
-  })
-}
-    }catch(error){
-      console.error("Mentee dupdate failed:", error);
+ // In your store
+async updateMentee({ commit }, { menteeID, updatedData }) {
+  try {
+    const res = await axios.put(`${api}/mentee/${menteeID}`, updatedData);
+
+    if (res.status === 200) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Mentee updated',
+        text: 'Your information has been updated',
+      });
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Update failed',
+        text: 'An error occurred during update',
+      });
     }
-  },
+  } catch (error) {
+    console.error('Mentee update failed:', error);
+  }
+}
+,
   // mentee
   async login(context, payload) {
     try {
@@ -295,6 +298,27 @@ try{
   async deleteReservation({ commit }, payload) {
     try {
       const {msg} = (await axios.delete(`${api}/mentee/${payload.menteeID}/reservation/${payload.resID}`)).data;
+      if(msg){
+        Swal.fire({
+          icon: "success",
+          title: "reservation Deleted",
+          text: "The reservation has been successfully deleted.",
+        })
+      }else {
+        Swal.fire({
+          icon: "error",
+          title: "Deletion Failed",
+          text: "An error occurred during reservation deletion.",
+        });
+      }
+      // commit('deleteReservation', resID);
+    } catch (error) {
+      console.error(error);
+    }
+  },
+  async deleteReservations({ commit }, payload) {
+    try {
+      const {msg} = (await axios.delete(`${api}/mentee/${payload.menteeID}/reservation/`)).data;
       if(msg){
         Swal.fire({
           icon: "success",
