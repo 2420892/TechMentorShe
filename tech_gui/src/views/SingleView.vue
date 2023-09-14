@@ -1,7 +1,7 @@
 <template>
     <div class="d-flex justify-content-center align-items-center vh-100"> 
       <div class="logout-button">
-        <log-out />
+        <LogOutVue />
       </div>
       <div v-if="mentor" class="card mb-3" style="max-width: 1000px;">
         <div class="row g-0">
@@ -36,7 +36,7 @@
   import LogOutVue from '@/components/LogOut.vue';
  export default {
   components:{
-LogOut,
+    LogOutVue,
   },
   computed:{
     mentor(){

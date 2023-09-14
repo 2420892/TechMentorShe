@@ -209,7 +209,7 @@ export default {
   
   },
   mounted() {
-    this.$store.dispatch('fetchMentee');
+    this.$store.dispatch('fetchMentees');
     this.$store.dispatch('fetchMentors');
   },
   methods: {

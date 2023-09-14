@@ -27,6 +27,9 @@
                   <input type="text" class="form-control" id="exampleFormControlInput5" placeholder="Your tech field" v-model="form.techField" required>
                 </div>
                 <div class="mb-4">
+                  <input type="text" class="form-control" id="exampleFormControlInput5" placeholder="user Role" v-model="form.mentorRole" required>
+                </div>
+                <div class="mb-4">
                   <input type="number" class="form-control" id="exampleFormControlInput6" placeholder="Your Age" v-model="form.mentorAge" required>
                 </div>
                 <div class="mb-4">
@@ -50,9 +53,6 @@
                 </div>
               <div class="form-check d-flex justify-content-center mb-5">
                 <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
-                <!-- <label class="form-check-label" for="form2Example3g">
-                  I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
-                </label> -->
               </div>
 
               <div class="d-flex justify-content-center">

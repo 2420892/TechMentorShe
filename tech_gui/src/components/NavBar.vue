@@ -39,7 +39,7 @@
                 <li><router-link to="/LogIn" class="dropdown-item" >LogIn</router-link></li>
               </ul>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" v-show="isAdmin">
               <router-link to="/admin"><i class="bi bi-motherboard-fill"></i>Admin</router-link>
             </li>
             <li class="nav-item">
@@ -62,36 +62,30 @@ const {cookies} = useCookies()
 
 export default {
   computed: {
-   
-    mentee(){
-  return this.$store.state.mentee || cookies.get("LegitUser")
-
-},
-mentor(){
-  return this.$store.state.mentor || cookies.get("LegitMentor")
-
-},
-result(){
-  if (this.mentee?.result?.length) {
-    return this.mentee?.result
-  } else {
-    return cookies.get("LegitUser")?.result 
-   }
-},
-    isMentor() {
-      return this.result?.mentorRole?.toLowerCase() == "mentor";
-    },
-    isMentee() {
-  
-      return this.result?.menteeRole?.toLowerCase() == "mentee";
-    },
-    // isAdmin() {
-    //   // Add logic to check if the user is an admin
-    //   // For example, if you have an 'admin' role in your Vuex store
-    //   // You can use this.admin === true
-    //   return false; // Change this logic according to your implementation
-    // },
+  mentee() {
+    return this.$store.state.mentee || cookies.get("LegitUser");
   },
+  mentor() {
+    return this.$store.state.mentor || cookies.get("LegitMentor");
+  },
+  result() {
+    if (this.mentee?.result?.length) {
+      return this.mentee?.result;
+    } else {
+      return cookies.get("LegitUser")?.result;
+    }
+  },
+  isMentor() {
+    return this.result?.mentorRole?.toLowerCase() === "mentor";
+  },
+  isMentee() {
+    return this.result?.menteeRole?.toLowerCase() === "mentee";
+  },
+  isAdmin() {
+    // Check if the user has an admin role
+    return this.result?.mentorRole?.toLowerCase() === "admin" && this.isMentor();
+  }
+},
 };
 </script>
 

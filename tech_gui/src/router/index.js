@@ -37,11 +37,11 @@ const routes = [
       path: '/reservations',
       name: 'reservations',
     component: () => import('../views/ReservationsView.vue'),
-    beforeEnter() {
-      if (!cookies.get("LegitUser")) {
-        router.push({ name: "LogIn" });
-      }
-    },
+    // beforeEnter() {
+    //   if (!cookies.get("LegitUser")) {
+    //     router.push({ name: "LogIn" });
+    //   }
+    // },
   },
   {
     path: '/contact',
@@ -52,11 +52,11 @@ const routes = [
     path: '/admin',
     name: 'admin',
     component: () => import( '../views/AdminView.vue'),
-    beforeEnter() {
-      if (!cookies.get("LegitUser")) {
-        router.push({ name: "LogIn" });
-      }
-    }
+    // beforeEnter() {
+    //   if (!cookies.get("LegitUser")) {
+    //     router.push({ name: "LogIn" });
+    //   }
+    // }
   },
   // {
   //   path: '/logout',
@@ -93,11 +93,11 @@ const routes = [
     path: '/SingleView/:mentorID',
     name: 'SingleView',
     component: () => import('../views/SingleView.vue'),
-    beforeEnter() {
-      if (!cookies.get("LegitUser")) {
-        router.push({ name: "LogIn" });
-      }
-    },
+    // beforeEnter() {
+    //   if (!cookies.get("LegitUser")) {
+    //     router.push({ name: "LogIn" });
+    //   }
+    // },
   },
     
   {
