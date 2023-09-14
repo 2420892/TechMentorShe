@@ -47,9 +47,7 @@ export default createStore({
     deleteReservation(state, resID) {
       state.reservations = state.reservations.filter((reservation) => reservation.resID !== resID);
     },
-    updateMentee(state, updatedData) {
-      state.mentee = updatedData;
-    },
+  
   }, 
   actions: {
     async fetchMentors(context) {
@@ -180,28 +178,20 @@ export default createStore({
    
   },
  // In your store
- async updateMentee({ commit }, { menteeID, updatedData }) {
-  try {
-    const res = await axios.put(`${api}/mentee/${menteeID}`, updatedData);
-
-    if (res.status === 200) {
-      this.$store.commit('updateMentee', updatedData); // Commit a mutation to update the state
-      Swal.fire({
-        icon: 'success',
-        title: 'Mentee updated',
-        text: 'Your information has been updated',
-      });
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Update failed',
-        text: 'An error occurred during update',
-      });
-    }
-  } catch (error) {
-    console.error('Mentee update failed:', error);
-  }
+ updateMentee({ commit }, mentee) {
+  return axios
+    .put(`${api}/mentee/${mentee.menteeID}`, mentee)
+    .then((response) => {
+      commit('setMentee', response.data); // Update the mentee data in the store
+      return response.data;
+    })
+    .catch((error) => {
+      console.error('Error updating mentee:', error);
+      throw error;
+    });
 },
+// ...
+
   // mentee
   async login(context, payload) {
     try {

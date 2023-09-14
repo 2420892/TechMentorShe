@@ -16,13 +16,43 @@
               <p class="card-text">Mentee Surname: {{ mentee.lastName }}</p>
               <p class="card-text">Mentee Age: {{ mentee.menteeAge }}</p>
               <p class="card-text">Mentee Email: {{ mentee.emailAdd }}</p>
-              <button @click="updateMentee(mentee.mID)" class="btn btn-primary">Update Profile</button>
-              <button @click="deleteMentee(mentee.menteeID)" class="btn btn-danger">Delete Account</button>
+              <button @click="showUpdateModal" class="btn btn-primary">Edit Profile</button>
+              <button @click="deleteMentee(mentee?.menteeID)" class="btn btn-danger">Delete Account</button>
+              
             </div>
           </div>
         </div>
       </div>
-    
+      <b-modal v-model="isUpdateModalVisible" title="Update Mentee Profile">
+        <form @submit.prevent="updateMentee">
+          <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input v-model="updatedMentee.firstName" type="text" id="firstName" class="form-control" />
+          </div>
+  
+          <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <input v-model="updatedMentee.lastName" type="text" id="lastName" class="form-control" />
+          </div>
+  
+          <div class="form-group">
+            <label for="menteeAge">Age:</label>
+            <input v-model="updatedMentee.menteeAge" type="number" id="menteeAge" class="form-control" />
+          </div>
+  
+          <div class="form-group">
+            <label for="menteeRole">Role:</label>
+            <input v-model="updatedMentee.menteeRole" type="text" id="menteeRole" class="form-control" />
+          </div>
+  
+          <div class="form-group">
+            <label for="emailAdd">Email:</label>
+            <input v-model="updatedMentee.emailAdd" type="email" id="emailAdd" class="form-control" />
+          </div>
+  
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
+      </b-modal>
 
     <!-- Mentor Profile Card -->
 
@@ -58,14 +88,17 @@ export default {
   components:{
 LogOut,
   },
-  data(){
-    updatedData = {
-        // Add the fields you want to update with their new values here
-        // For example:
-        firstName: "",
-        lastName: "",
-        // ...
-      };
+  data() {
+    return {
+      isUpdateModalVisible: false,
+      updatedMentee: {
+        firstName: '',
+        lastName: '',
+        menteeAge: null,
+        menteeRole: '',
+        emailAdd: '',
+      },
+    };
   },
   computed: {
     // mentor(){
@@ -89,9 +122,24 @@ mID(){
   },
   methods:{
 // In your store
-updateMentee(mID,updatedData){
-this.$store.dispatch('updateMentee', (mID,updatedData))
-}
+showUpdateModal() {
+      // Initialize the updatedMentee object with the current mentee data
+      this.updatedMentee = { ...this.mentee };
+      this.isUpdateModalVisible = true;
+    },
+    updateMentee() {
+      this.$store
+        .dispatch('updateMentee', this.updatedMentee)
+        .then(() => {
+          this.isUpdateModalVisible = false; // Close the modal on success
+          // Handle success, show a success message, or redirect to another page.
+        })
+        .catch((error) => {
+          // Handle error, show an error message, or log the error.
+        });
+    },
+  },
+
 ,
 deleteMentee(menteeID) {
   this.$store.dispatch('deleteMentee', menteeID);
