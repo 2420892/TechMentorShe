@@ -1,7 +1,9 @@
 <template>
   <div>
     <h1>Made Reservations</h1>
-   
+    <div class="logout-button">
+      <log-out />
+    </div>
     <section style="background-color: #eee;">
       <div class="container py-5">
         <div class="row justify-content-center mb-3">
@@ -62,7 +64,11 @@
 <script>
 import { useCookies } from "vue3-cookies"
 const {cookies} = useCookies()
+import LogOut from "@/components/LogOut.vue";
 export default {
+  components:{
+    LogOut,
+  },
   computed:{
 reservations(){
   return this.$store.state.reservation;
@@ -115,3 +121,11 @@ mID(){
   }
 };
 </script>
+
+<style scoped>
+.logout-button {
+  position: absolute;
+  top:60px;
+  right: 10px; 
+}
+</style>

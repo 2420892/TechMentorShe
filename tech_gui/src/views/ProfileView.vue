@@ -1,7 +1,9 @@
 <template>
   <div>
     <!-- Mentee Profile Card -->
-   
+    <div class="logout-button">
+      <log-out />
+    </div>
       <div class="card mb-3" v-for="mentee in mentee" :key="mentee.menteeID" style="max-width: 540px;">
         <div class="row g-0">
           <div class="col-md-4">
@@ -14,7 +16,7 @@
               <p class="card-text">Mentee Surname: {{ mentee.lastName }}</p>
               <p class="card-text">Mentee Age: {{ mentee.menteeAge }}</p>
               <p class="card-text">Mentee Email: {{ mentee.emailAdd }}</p>
-              <button @click="updateMentee(mID)" class="btn btn-primary">Update Profile</button>
+              <button @click="updateMentee(mentee.mID)" class="btn btn-primary">Update Profile</button>
               <button @click="deleteMentee(mentee.menteeID)" class="btn btn-danger">Delete Account</button>
             </div>
           </div>
@@ -51,12 +53,24 @@
 <script>
 import { useCookies } from "vue3-cookies"
 const {cookies} = useCookies()
+import LogOut from "@/components/LogOut.vue";
 export default {
-  
+  components:{
+LogOut,
+  },
+  data(){
+    updatedData = {
+        // Add the fields you want to update with their new values here
+        // For example:
+        firstName: "",
+        lastName: "",
+        // ...
+      };
+  },
   computed: {
-    mentor(){
-      return this.$store.state.mentor
-    },
+    // mentor(){
+    //   return this.$store.state.mentor
+    // },
     mentee(){
   return this.$store.state.mentee || cookies.get("LegitUser")
 
@@ -75,26 +89,8 @@ mID(){
   },
   methods:{
 // In your store
-async updateMentee({ commit }, { menteeID, updatedData }) {
-  try {
-    const res = await axios.put(`${api}/mentee/${menteeID}`, updatedData);
-
-    if (res.status === 200) {
-      Swal.fire({
-        icon: 'success',
-        title: 'Mentee updated',
-        text: 'Your information has been updated',
-      });
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Update failed',
-        text: 'An error occurred during update',
-      });
-    }
-  } catch (error) {
-    console.error('Mentee update failed:', error);
-  }
+updateMentee(mID,updatedData){
+this.$store.dispatch('updateMentee', (mID,updatedData))
 }
 ,
 deleteMentee(menteeID) {
@@ -110,5 +106,9 @@ deleteMentor(mentorID){
 </script>
 
 <style scoped>
-/* Add your component-specific styles here */
+.logout-button {
+  position: absolute;
+  top:60px;
+  right: 10px; 
+}
 </style>

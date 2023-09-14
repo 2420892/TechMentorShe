@@ -1,5 +1,8 @@
 <template>
     <div class="d-flex justify-content-center align-items-center vh-100"> 
+      <div class="logout-button">
+        <log-out />
+      </div>
       <div v-if="mentor" class="card mb-3" style="max-width: 1000px;">
         <div class="row g-0">
           <div class="col-md-4">
@@ -30,7 +33,11 @@
   </template>
   
   <script>
+  import LogOutVue from '@/components/LogOut.vue';
  export default {
+  components:{
+LogOut,
+  },
   computed:{
     mentor(){
       return this.$store.state.mentor
@@ -51,5 +58,10 @@
   }
   .card-text{
     font-size: 20px;
+  }
+  .logout-button {
+    position: absolute;
+    top:60px;
+    right: 10px; 
   }
   </style>

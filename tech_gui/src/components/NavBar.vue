@@ -22,33 +22,28 @@
             <li class="nav-item">
               <router-link to="/about"><i class="bi bi-file-person"></i>About</router-link>
             </li>
-            <li class="nav-item"   >
+            <li class="nav-item">
               <router-link to="/mentors"><i class="bi bi-mortarboard-fill"></i>OurMentors</router-link>
             </li>
           
             <li class="nav-item" >
-              <router-link to="/reservations" v-show="isMentee"><i class="bi bi-motherboard-fill"></i>Reservations</router-link>
-              <!-- I should hide this to non-users -->
+              <router-link to="/reservations"><i class="bi bi-motherboard-fill"></i>Reservations</router-link>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Register
               </a>
               <ul class="dropdown-menu ">
-                <li><router-link to="/profile" class="dropdown-item" >Become a Mentor</router-link></li>
+                <li><router-link to="/SignupMentor" class="dropdown-item" >Become a Mentor</router-link></li>
                 <li><router-link to="/SignupMentee" class="dropdown-item" >Become a Mentee</router-link></li>
                 <li><router-link to="/LogIn" class="dropdown-item" >LogIn</router-link></li>
               </ul>
             </li>
-            <li class="nav-item" v-if="isMentor">
+            <li class="nav-item">
               <router-link to="/admin"><i class="bi bi-motherboard-fill"></i>Admin</router-link>
-              <!-- I should hide this to non-users -->
             </li>
             <li class="nav-item">
               <router-link to="/contact"><i class="bi bi-person-lines-fill"></i>Contact</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link to="/logout"><i class="bi bi-person-lines-fill"></i>logout</router-link>
             </li>
             <li class="nav-item">
               <router-link to="/profilelog" ><i class="bi bi-person-lines-fill"></i>profile</router-link>
@@ -72,6 +67,10 @@ export default {
   return this.$store.state.mentee || cookies.get("LegitUser")
 
 },
+mentor(){
+  return this.$store.state.mentor || cookies.get("LegitMentor")
+
+},
 result(){
   if (this.mentee?.result?.length) {
     return this.mentee?.result
@@ -80,18 +79,18 @@ result(){
    }
 },
     isMentor() {
-      return this.result?.role?.toLowerCase() == "mentor";
+      return this.result?.mentorRole?.toLowerCase() == "mentor";
     },
     isMentee() {
   
       return this.result?.menteeRole?.toLowerCase() == "mentee";
     },
-    isAdmin() {
-      // Add logic to check if the user is an admin
-      // For example, if you have an 'admin' role in your Vuex store
-      // You can use this.admin === true
-      return false; // Change this logic according to your implementation
-    },
+    // isAdmin() {
+    //   // Add logic to check if the user is an admin
+    //   // For example, if you have an 'admin' role in your Vuex store
+    //   // You can use this.admin === true
+    //   return false; // Change this logic according to your implementation
+    // },
   },
 };
 </script>

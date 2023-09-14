@@ -4,7 +4,7 @@
       <img
         src="https://i.ibb.co/VWfCCz4/keren-levand-pm-e64-IOYHM-unsplash-1170x780.jpg"
         class="img-fluid"
-        alt="..."
+        alt="homeBackground"
         style="object-fit: center; object-position: center; height: 60vh;"
       >
       <div class="overlay"></div>
@@ -12,6 +12,9 @@
         <h1 class="card-title">TechMentorShe: Aspiring<span style="color:#00CED1"> Tech Stars <br>Meet Industry Sheroes.</span></h1>
         <h4 class="card-text">Bridging the Gender Gap in Tech, One Mentorship at a Time.</h4>
         <h4 class="card-text"><small>Empowering Tech Futures Together</small></h4>
+        <div class="logout-button">
+          <log-out />
+        </div>
       </div>
     </div>
     <div class="container text-center" id="second">
@@ -76,9 +79,11 @@
 </template>
 <script>
 import SpinnerComp from '@/components/SpinnerComp.vue';
+import LogOut from '../components/LogOut.vue';
 export default {
   components: {
-    SpinnerComp
+    SpinnerComp,
+    LogOut
   },
   computed: {
     mentors() {
@@ -136,6 +141,11 @@ export default {
 
 .card-body {
   margin-top: 10px;
+}
+.logout-button {
+  position: absolute;
+  top: 0;
+  right: 10px; 
 }
 
 </style>

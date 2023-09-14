@@ -13,22 +13,14 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView,
-    beforeEnter() {
-      if (!cookies.get("LegitUser")) {
-        router.push({ name: "LogIn" });
-      }
-    },
+   
   },
   
   {
     path: '/about',
     name: 'about',
     component: () => import( '../views/AboutView.vue'),
-    beforeEnter() {
-      if (!cookies.get("LegitUser")) {
-        router.push({ name: "LogIn" });
-      }
-    },
+   
   },
   {
     path: '/mentors',

@@ -1,7 +1,11 @@
 <template>
   <div class="mentors">
-    <h2>Mentors Page</h2>
+    <h2>Meet our Sherois</h2>
+    <div class="logout-button">
+      <log-out />
+    </div>
     <div>
+ 
       <label for="techFieldFilter">Filter by Tech Field:</label>
       <select id="techFieldFilter" v-model="filterCriteria.techField" @change="filterMentors">
         <option value="">All</option>
@@ -62,10 +66,12 @@
 import { useCookies } from "vue3-cookies";
 const { cookies } = useCookies();
 import  SpinnerCompVue from '../components/SpinnerComp.vue';
+import LogOut from "@/components/LogOut.vue";
 
 export default {
   components: {
     SpinnerCompVue,
+    LogOut,
   },
   data() {
     return {
@@ -144,4 +150,10 @@ export default {
 
   border: none;
 }
+.logout-button {
+  position: absolute;
+  top:60px;
+  right: 10px; 
+}
+
 </style>
