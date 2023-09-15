@@ -78,7 +78,7 @@ export default createStore({
     async fetchMentee(context) {
       try {
         const { data } = await axios.get(`${api}/mentee/${menteeID}`); 
-        context.commit("setMentee", data.result);
+        context.commit("setMentee", data.result[0]);
       } catch (e) {
         context.commit("setMsg", "An error occurred");
       }
@@ -179,22 +179,7 @@ export default createStore({
    
   },
  // In your store
- async updateMentee(context, editMenteeData) {
-  try {
-    let { msg } = (await axios.put(`${api}/mentee/${editMenteeData.menteeID}`, editMenteeData)).data;
-    if (msg) {
-      context.dispatch('fetchMentee');
-      context.commit('setMentee', editMenteeData);
-      Swal.fire({
-        icon: 'success',
-        title: 'Success',
-        text: msg,
-      });
-    }
-  } catch (error) {
-    console.error(error);
-  }
-},
+    
 async updateMentor(context, editMentorData) {
   try {
     let { msg } = (await axios.patch(`${api}/mentor/${editMentorData.mentorID}`, editMentorData)).data;
@@ -234,7 +219,7 @@ async updateMentor(context, editMentorData) {
         Swal.fire({
           title: msg,
           text: `You are not registered, or provided wrong register details`,
-          icon: "success"
+          icon: "Error"
         });
         router.push("/logIn");
       }
@@ -263,7 +248,7 @@ async updateMentor(context, editMentorData) {
         Swal.fire({
           title: msg,
           text: `You are not registered, or provided wrong register details`,
-          icon: "failed"
+          icon: "Error"
         });
         router.push("/logIn");
       }
@@ -377,9 +362,9 @@ try{
         router.push("/reservations");
       } else {
         Swal.fire({
-          title: "Error",
-          text: msg,
-          icon: "error",
+          title: "success",
+          text: "meeting reservation added",
+          icon: "success",
           timer: 4000
         });
       }

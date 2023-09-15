@@ -27,8 +27,8 @@
             <td>{{ mentee.emailAdd }}</td>
             <td>{{ mentee.menteeAge }}</td>
             <td>
-              <button class="btn btn-secondary" @click="editMentee(mentee)">Edit</button>
-              <button class="btn btn-primary" @click="deleteMentee(mentee.menteeID)">Delete</button>
+              <button class="btn btn-secondary" @click="editMentee(mentee)" style="width:5rem;">Edit</button>
+              <button class="btn btn-primary" @click="deleteMentee(mentee.menteeID)" style="width:5rem;">Delete</button>
             </td>
           </tr>
         </tbody>
@@ -100,8 +100,8 @@
             <td>{{ mentor.techPosition }}</td>
       <td>{{formattedAvail(mentor.availDate)}}<br>Time:{{ mentor.startTime }} - {{ mentor.endTime }}</td>
             <td>
-              <button class="btn btn-secondary" @click="editMentor(mentor)">Edit</button>
-              <button class="btn btn-primary" @click="deleteMentor(mentor.mentorID)">Delete</button>
+              <button class="btn btn-secondary" @click="editMentor(mentor)" style="width:5rem;">Edit</button>
+              <button class="btn btn-primary" @click="deleteMentor(mentor.mentorID)" style="width:5rem;"><i class="bi bi-trash3-fill"></i></button>
             </td>
           </tr>
         </tbody>
@@ -253,7 +253,7 @@ deleteMentee(menteeID) {
 },
 editMentor(mentor) {
       this.isLoadingUpdate2 = true;
-      this.editMentorData = { ...mentor }; // Assign mentor data to editMentorData
+      this.editMentorData = { ...mentor }; 
       this.isLoadingUpdate2 = false;
       this.showEditModal2 = true; 
     },
@@ -324,16 +324,30 @@ editMentor(mentor) {
     align-items: center;
   }
   @media screen and (max-width: 641px) {
-    /* Hide specific columns for mentors and mentees */
     .table th:nth-child(4),
     .table td:nth-child(4) {
       display: none;
     }
-  
-    /* Combine first name and last name for mentees */
-    .table td:nth-child(3) {
+    .table th:nth-child(5),
+    .table td:nth-child(5) {
       display: none;
     }
+    
+  }
+  @media screen and (max-width: 555px) {
+    .table th:nth-child(2),
+    .table td:nth-child(2) {
+      display: none;
+    }
+    .table th:nth-child(1),
+    .table td:nth-child(1) {
+      display: none;
+    }
+    button{
+      width:3rem!important;
+    }
+    
+    
   }
   </style>
   

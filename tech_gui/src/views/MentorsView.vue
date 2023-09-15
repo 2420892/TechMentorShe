@@ -28,7 +28,7 @@
     <div v-if="filteredMentors.length > 0"> 
       <div id="Testimonials" class="container">
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
-          <div class="col mb-4" v-for="mentor in filteredMentors" :key="mentor.mentorID">
+          <div class="col mb-4 mt-2" v-for="mentor in filteredMentors" :key="mentor.mentorID">
             <div class="card h-100">
               <div class="card-body d-flex">
                 <div class="left-column">
@@ -44,9 +44,9 @@
                   <p class="card-title">Field: {{ mentor.techField }} <br> Position: {{ mentor.techPosition }}</p>
                   <p class="card-text"><i class="bi bi-quote"></i>{{ mentor.describtion }}</p>
                   <router-link :to="{ name: 'SingleView', params: { mentorID: mentor.mentorID } }">
-                    <button>View More</button>
+                    <button style="width:9rem;">View More</button>
                   </router-link>
-                    <button @click="makeRes(mentor)"> Make Reservation</button>
+                    <button @click="makeRes(mentor)" style="width:9rem;"> Make Reservation</button>
                 </div>
               </div>
             </div>
@@ -142,8 +142,6 @@ export default {
 </script>
 
 <style scoped>
-
-
 .card {
 background-color:#dfdfdf;
 

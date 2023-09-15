@@ -4,7 +4,7 @@
     <div class="logout-button">
       <log-out />
     </div>
-      <div class="card mb-3" v-for="mentee in mentee" :key="mentee.menteeID" style="max-width: 540px;">
+      <div class="card mb-3" v-if="mentee" style="max-width: 540px;">
         <div class="row g-0">
           <div class="col-md-4">
             <img :src="mentee.image" class="img-fluid rounded-start" alt="Mentee Image">
@@ -193,7 +193,7 @@ export default {
   },
   computed: {
     mentee() {
-      return this.$store.state.mentee || cookies.get("LegitUser");
+      return this.$store.state.mentee || cookies.get("LegitUser")?.result;
     },
     mentor() {
       return this.$store.state.mentor || cookies.get("LegitMentor");

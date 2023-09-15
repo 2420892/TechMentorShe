@@ -69,20 +69,17 @@
 </style>
 
 <script>
-  // Function to validate the form
   function validateForm() {
     var firstName = document.getElementById("firstName").value;
     var lastName = document.getElementById("lastName").value;
     var email = document.getElementById("email").value;
     var message = document.getElementById("message").value;
 
-    // Check if email contains "@" and "."
     if (email.indexOf("@") === -1 || email.indexOf(".") === -1) {
       alert("Please enter a valid email address.");
       return false;
     }
 
-    // Check if the message is typed
     if (message.trim() === "") {
       alert("Please enter a message.");
       return false;
@@ -91,7 +88,7 @@
 
     document.querySelector("form").addEventListener("submit", function (event) {
       if (!validateForm()) {
-        event.preventDefault(); // Prevent form submission if validation fails
+        event.preventDefault(); 
       }
     });
   }

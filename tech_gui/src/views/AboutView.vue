@@ -45,7 +45,7 @@ h4 {
 
 .container-custom {
   max-width: 1100px!important; 
-  margin: 0 auto; /* Center the container horizontally */
+  margin: 0 auto; 
 }
 
 @media screen and (max-width: 993px) {

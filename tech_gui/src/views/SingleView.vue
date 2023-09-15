@@ -21,7 +21,7 @@
               <p class="card-text">
                 <small class="text-muted"> You can email me at {{ mentor.emailAdd }} .</small>
               </p>
-              <a href="">Make a reservation</a>
+              <router-link to="/mentors"><button>Close</button> </router-link>
             </div>
           </div>
         </div>

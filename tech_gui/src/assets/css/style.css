@@ -11,7 +11,6 @@
     grid-template-columns: repeat(3,1fr);
     grid-template-rows: auto minmax(100vh,1fr) auto;
     background-color: #f8f9fa;
-    /* background-image: url('https://i.postimg.cc/L5R4nzjh/abstract-diagonal-white-grey-background-and-texture-free-vector.jpg'); */
     background-repeat: no-repeat;
     background-size: cover;
     overflow-x: hidden;
@@ -26,3 +25,4 @@ button:hover{
     animation: pulse;
     animation-duration: 2s;
   }
+ 
