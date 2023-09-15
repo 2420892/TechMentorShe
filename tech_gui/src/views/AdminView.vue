@@ -1,6 +1,7 @@
 <template>
     <div class="container-fluid">
       <h2>MENTees</h2>
+      <!-- mentees -->
       <table class="table">
         <thead>
           <tr>
@@ -32,6 +33,7 @@
           </tr>
         </tbody>
       </table>  
+      <!-- edit mentees -->
       <div v-if="showEditModal" class="modal-overlay">
         <div class="modal-content">
         <h3>Edit user</h3>
@@ -320,6 +322,18 @@ editMentor(mentor) {
   .mentor-image {
     display: flex;
     align-items: center;
+  }
+  @media screen and (max-width: 641px) {
+    /* Hide specific columns for mentors and mentees */
+    .table th:nth-child(4),
+    .table td:nth-child(4) {
+      display: none;
+    }
+  
+    /* Combine first name and last name for mentees */
+    .table td:nth-child(3) {
+      display: none;
+    }
   }
   </style>
   

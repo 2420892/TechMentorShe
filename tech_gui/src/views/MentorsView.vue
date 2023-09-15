@@ -46,9 +46,7 @@
                   <router-link :to="{ name: 'SingleView', params: { mentorID: mentor.mentorID } }">
                     <button>View More</button>
                   </router-link>
-                  <!-- <router-link :to="{ name: 'reservations' }"> -->
-                    <button @click="makeRes(mentor)"> Add to wishlist</button>
-                  <!-- </router-link> -->
+                    <button @click="makeRes(mentor)"> Make Reservation</button>
                 </div>
               </div>
             </div>

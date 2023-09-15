@@ -25,27 +25,25 @@
                   </div>
                   <div class="col-md-6 col-lg-6 col-xl-6">
                     <h5>{{reservation.firstName}}</h5>
-                    <div class="mt-1 mb-0 text-muted small">
-                      <span>({{reservation.mentorAge}})</span>
-                      <span class="text-primary"> • </span>
-                      <span>{{reservation.techField}}</span>
-                    </div>
-                    <div class="mb-2 text-muted small">
-                      <span>{{reservation.techPosition}}</span>
-                      <span class="text-primary"> • </span>
-                    </div>
                     <p class="text-truncate mb-4 mb-md-0">
                      You have added this reservation to your wish list.Corfirm reservation or cancel
                     </p>
                   </div>
                   <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
                     <div class="d-flex flex-row align-items-center mb-1">
-                      <h4 class="mb-1 me-1">{{reservation.availDate}}</h4>  
+                      <h4 class="mb-1 me-1">{{formattedAvail(reservation.availDate)}}</h4>  
                     </div>
                     <h6 class="text-success">{{reservation.startTime}}</h6>
                     <h6 class="text-success">{{reservation.endTime}}</h6>
                     <div class="d-flex flex-column mt-4">
-                      <button class="btn btn-primary btn-sm" type="button">Confirm Reservation</button>
+                      <button
+                      class="btn btn-primary btn-sm"
+                      type="button"
+                      @click="showConfirmation(reservation)"
+                    >
+                      Confirm Reservation
+                    </button>
+                    
                       <button class="btn btn-outline-primary btn-sm mt-2"  @click="deleteReservation(reservation.resID)">
                       Cancel
                       </button>
@@ -55,6 +53,15 @@
               </div>
             </div>
           </div>
+          <div v-if="showConfirmationDialog && selectedReservation" class="confirmation-dialog">
+            <div class="confirmation-content">
+              <p>
+                Meeting reservation confirmed, you are meeting {{ selectedReservation.firstName }} at {{ selectedReservation.startTime }} on {{ selectedReservation.availDate }}.
+              </p>
+              <button class="btn btn-primary" @click="closeConfirmationDialog">Close</button>
+            </div>
+          </div>
+          
         </div>
       </div>
       </section>
@@ -69,6 +76,13 @@ export default {
   components:{
     LogOut,
   },
+  data() {
+  return {
+    showConfirmationDialog: false,
+    selectedReservation: null,
+  };
+},
+
   computed:{
 reservations(){
   return this.$store.state.reservation;
@@ -86,6 +100,13 @@ mID(){
 }
   },
   methods: {
+    formattedAvail(availDate) {
+      if (availDate) {
+        const dateParts = availDate.split('T');
+        return dateParts[0];
+      }
+      return '';
+    },
     deleteReservation(resID) {
       const payload = {
         menteeID: this.mID, 
@@ -113,6 +134,14 @@ mID(){
           console.error(error);
         });
     },
+    showConfirmation(reservation) {
+    this.selectedReservation = reservation;
+    this.showConfirmationDialog = true;
+  },
+
+  closeConfirmationDialog() {
+    this.showConfirmationDialog = false;
+  },
   
   },
 
@@ -128,4 +157,26 @@ mID(){
   top:60px;
   right: 10px; 
 }
+  .confirmation-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+
+  .confirmation-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+  }
+
+
 </style>

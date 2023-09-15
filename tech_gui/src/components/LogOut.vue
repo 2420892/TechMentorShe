@@ -10,6 +10,7 @@ export default {
   methods: {
 logOut(){
   this.$store.dispatch("logOut")
+  window.location.reload();
 }
     }}
 

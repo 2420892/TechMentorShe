@@ -17,8 +17,7 @@
               <p class="card-text">Mentee Age: {{ mentee.menteeAge }}</p>
               <p class="card-text">Mentee Email: {{ mentee.emailAdd }}</p>
               <button class="btn btn-secondary" @click="editMentee(mentee)">Edit</button>
-              <button @click="deleteMentee(mentee?.menteeID)" class="btn btn-danger">Delete Account</button>
-              
+              <button class="btn btn-primary" @click="deleteMentee(mentee.menteeID)">Delete</button>
             </div>
           </div>
         </div>
@@ -230,9 +229,8 @@ export default {
       this.showEditModal = false; 
     },
     deleteMentee(menteeID) {
-      this.$store.dispatch('deleteMentee', menteeID);
-      window.location.reload();
-    },
+  this.$store.dispatch('deleteMentee', menteeID);
+},
 
     editMentor(mentor) {
       this.isLoadingUpdate2 = true;
@@ -266,8 +264,6 @@ export default {
   right: 10px;
 }
 
-.modal-overlay {
-}
 
 
 </style>
