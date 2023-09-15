@@ -61,7 +61,7 @@
 
     <!-- Mentor Profile Card -->
 
-      <div class="card mb-3" v-for="mentor in mentor" :key="mentor.mentorID" style="max-width: 540px;">
+      <div class="card mb-3" v-if="mentor " style="max-width: 540px;">
         <div class="row g-0">
           <div class="col-md-4">
             <img :src="mentor.image" class="img-fluid rounded-start" alt="Mentor Image">
@@ -196,7 +196,7 @@ export default {
       return this.$store.state.mentee || cookies.get("LegitUser")?.result;
     },
     mentor() {
-      return this.$store.state.mentor || cookies.get("LegitMentor");
+      return this.$store.state.mentor || cookies.get("LegitMentor")?.result;
     },
     formattedAvailDate() {
     if (this.editMentorData.availDate) {

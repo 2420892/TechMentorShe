@@ -49,7 +49,7 @@
                   <input type="time" class="form-control" id="exampleFormControlInput10" placeholder="Your tech field" v-model="form.endTime" required>
                 </div>
                 <div class="mb-4">
-                  <input type="text" class="form-control" id="exampleFormControlInput11" placeholder="Your tech field" v-model="form.image" required>
+                  <input type="text" class="form-control" id="exampleFormControlInput11" placeholder="image" v-model="form.image" required>
                 </div>
               <div class="form-check d-flex justify-content-center mb-5">
                 <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
@@ -60,7 +60,7 @@
 
               </div>
               <p class="text-center text-muted mt-5 mb-0">
-                Already have an account? <router-link to="/" class="fw-bold text-body"><u>Login here</u></router-link>
+                Already have an account? <router-link to="/logIn" class="fw-bold text-body"><u>Login here</u></router-link>
               </p>
             </form>
             <p v-if="registrationError" class="error">{{ registrationError }}</p>

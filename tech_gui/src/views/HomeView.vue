@@ -66,7 +66,7 @@
               <p class="card-title">{{ mentor.firstName }} ({{mentor.mentorAge}})</p>
               <p class="card-title">{{ mentor.techField}} </p>
               <p class="card-title">{{mentor.techPosition}}</p>
-              <a class="view" href="/mentors">View More</a>
+              <router-link class="view" to="/mentors"><button>View More</button></router-link>
             </div>
           </div>
         </div>

@@ -247,9 +247,11 @@
     },
     deleteMentor(mentorID) {
   this.$store.dispatch('deleteMentor', mentorID);
+  window.location.reload();
 },
 deleteMentee(menteeID) {
   this.$store.dispatch('deleteMentee', menteeID);
+  window.location.reload();
 },
 editMentor(mentor) {
       this.isLoadingUpdate2 = true;

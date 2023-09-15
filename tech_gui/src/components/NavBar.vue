@@ -23,11 +23,11 @@
               <router-link to="/about"><i class="bi bi-file-person"></i>About</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/mentors"><i class="bi bi-mortarboard-fill"></i>OurMentors</router-link>
+              <router-link to="/mentors" v-show="isMentee || isMentor || isAdmin"><i class="bi bi-mortarboard-fill"></i>OurMentors</router-link>
             </li>
           
             <li class="nav-item" >
-              <router-link to="/reservations"><i class="bi bi-motherboard-fill"></i>Reservations</router-link>
+              <router-link to="/reservations" v-show="isMentee || isMentor || isAdmin"><i class="bi bi-motherboard-fill"></i>Reservations</router-link>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -46,7 +46,7 @@
               <router-link to="/contact"><i class="bi bi-person-lines-fill"></i>Contact</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/profilelog" ><i class="bi bi-person-lines-fill"></i>profile</router-link>
+              <router-link to="/profilelog" v-show="isMentee || isMentor || isAdmin" ><i class="bi bi-person-lines-fill"></i>profile</router-link>
             </li>
           </ul>
         </div>
@@ -69,22 +69,26 @@ export default {
     return this.$store.state.mentor || cookies.get("LegitMentor");
   },
   result() {
-    if (this.mentee?.result?.length) {
+  
       return this.mentee?.result;
-    } else {
-      return cookies.get("LegitUser")?.result;
-    }
+    
+  },
+  result1() {
+  
+      return this.mentor?.result;
+  
   },
   isMentor() {
-    return this.result?.mentorRole?.toLowerCase() === "mentor";
+    return this.result1?.mentorRole?.toLowerCase() == "mentor";
   },
   isMentee() {
-    return this.result?.menteeRole?.toLowerCase() === "mentee";
+    return this.result?.menteeRole?.toLowerCase() == "mentee";
   },
   isAdmin() {
-    // Check if the user has an admin role
-    return this.result?.mentorRole?.toLowerCase() === "admin" && this.isMentor();
-  }
+  const mentorRole = this.result1?.mentorRole;
+  return mentorRole && mentorRole.toLowerCase() === "admin";
+},
+
 },
 };
 </script>

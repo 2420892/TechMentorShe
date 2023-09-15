@@ -179,7 +179,22 @@ export default createStore({
    
   },
  // In your store
-    
+ async updateMentee(context, editMenteeData) {
+  try {
+    let { msg } = (await axios.put(`${api}/mentee/${editMenteeData.menteeID}`, editMenteeData)).data;
+    if (msg) {
+      context.dispatch('fetchMentee');
+      context.commit('setMentee', editMenteeData);
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: msg,
+      });
+    }
+  } catch (error) {
+    console.error(error);
+  }
+},
 async updateMentor(context, editMentorData) {
   try {
     let { msg } = (await axios.patch(`${api}/mentor/${editMentorData.mentorID}`, editMentorData)).data;
@@ -206,6 +221,7 @@ async updateMentor(context, editMentorData) {
   
       if (result) {
         context.commit('setMentee', { result, msg });
+        console.log( token, msg, result );
         cookies.set('LegitUser', { token, msg, result });
         authUser.applyToken(token);
         Swal.fire({
@@ -214,7 +230,7 @@ async updateMentor(context, editMentorData) {
           icon: "success",
           timer: 2000
         });
-        router.push("/mentors");
+        router.push("/");
       } else {
         Swal.fire({
           title: msg,
@@ -243,7 +259,7 @@ async updateMentor(context, editMentorData) {
           icon: "success",
           timer: 2000
         });
-        router.push("/mentors");
+        router.push("/");
       } else {
         Swal.fire({
           title: msg,
@@ -340,8 +356,10 @@ try{
   async logOut(context) {
     context.commit("setMentor");
     cookies.remove("LegitMentor");
+
     context.commit("setMentee");
     cookies.remove("LegitUser");
+    
   },
 
  

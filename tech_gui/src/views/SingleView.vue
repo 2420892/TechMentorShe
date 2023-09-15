@@ -21,7 +21,7 @@
               <p class="card-text">
                 <small class="text-muted"> You can email me at {{ mentor.emailAdd }} .</small>
               </p>
-              <router-link to="/mentors"><button>Close</button> </router-link>
+              <router-link to="/mentors" ><button style="width:9rem;">Close</button> </router-link>
             </div>
           </div>
         </div>
@@ -61,7 +61,19 @@
   }
   .logout-button {
     position: absolute;
-    top:60px;
+    top:50px;
     right: 10px; 
+  }
+  @media screen and (max-width: 995px) {
+    .custom-card-body-height {
+      height: auto;
+    }
+    .card-text {
+      font-size: 10px;
+
+    }
+    .card{
+      margin-top:80px;
+    }
   }
   </style>

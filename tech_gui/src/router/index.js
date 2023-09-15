@@ -58,16 +58,7 @@ const routes = [
     //   }
     // }
   },
-  // {
-  //   path: '/logout',
-  //   name: 'logout',
-  //   component: () => import( '../views/UserProfile.vue'),
-  //   beforeEnter() {
-  //     if (!cookies.get("LegitUser")) {
-  //       router.push({ name: "LogIn" });
-  //     }
-  //   },
-  // },
+ 
   {
     path: '/profilelog',
     name: 'profilelog',
