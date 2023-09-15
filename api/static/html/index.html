@@ -23,7 +23,7 @@
     <h1>Dazzling Jewels</h1>
     <table>
         <thead>
-            <h2>USERS ROUTE</h2>
+            <h2>MENTORS ROUTE</h2>
             <tr>
                 <th>Methods</th>
                 <th>Path</th>
@@ -31,30 +31,35 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>GET</td>
-                <td>/</td>
-                <td>Get to our home page</td>
+             <tr>
+                <td>POST</td>
+                <td>/login2</td>
+                <td>Log in mentor.</td>
             </tr>
             <tr>
                 <td>GET</td>
-                <td>/users</td>
-                <td>Retrieve a list of users.</td>
+                <td>/mentors</td>
+                <td>Retrieve a list of mentors.</td>
             </tr>
             <tr>
                 <td>POST</td>
                 <td>/register</td>
-                <td>Create a new user.</td>
+                <td>Create a new mentor.</td>
             </tr>
             <tr>
                 <td>PUT</td>
-                <td>/users/:id</td>
-                <td>The user record was updated.</td>
+                <td>/mentor/:id</td>
+                <td>Update mentor.</td>
             </tr>
             <tr>
                 <td>DELETE</td>
-                <td>/users/:id</td>
-                <td>A user record was deleted</td>
+                <td>/mentor/:id</td>
+                <td>Delete mentor</td>
+            </tr>
+              <tr>
+                <td>DELETE</td>
+                <td>/mentors</td>
+                <td>Delete mentors</td>
             </tr>
          
         </tbody>
@@ -62,7 +67,7 @@
     <!-- careers -->
     <table>
         <thead>
-            <h2>USERS ROUTE</h2>
+            <h2>MENTEES ROUTE</h2>
             <tr>
                 <th>Methods</th>
                 <th>Path</th>
@@ -72,23 +77,23 @@
         <tbody>
             <tr>
                 <td>GET</td>
-                <td>/careers</td>
-                <td>Retrieve a list of career bios.</td>
+                <td>/mentees</td>
+                <td>Retrieve a list of mentees.</td>
             </tr>
             <tr>
                 <td>POST</td>
-                <td>/addCareer</td>
-                <td>add a new mentor career bio.</td>
+                <td>/addMentee</td>
+                <td>add a new mentee.</td>
             </tr>
             <tr>
                 <td>PUT</td>
-                <td>/career/:id</td>
-                <td>Update mentors career bio..</td>
+                <td>/mentee/:id</td>
+                <td>Update mentee.</td>
             </tr>
             <tr>
                 <td>DELETE</td>
-                <td>/users/:id</td>
-                <td>A user record was deleted</td>
+                <td>/mentee/:id</td>
+                <td>delete mentee</td>
             </tr>
          
         </tbody>
@@ -98,7 +103,7 @@
 
     <table>
         <thead>
-            <h2>USERS ROUTE</h2>
+            <h2>RESERVATIONSROUTE</h2>
             <tr>
                 <th>Methods</th>
                 <th>Path</th>
@@ -108,24 +113,25 @@
         <tbody>
             <tr>
                 <td>GET</td>
-                <td>/reservations</td>
+                <td>/mentee/:id/reservations</td>
                 <td>Retrieve a list of career bios.</td>
             </tr>
             <tr>
                 <td>POST</td>
-                <td>/addreservations</td>
+                <td>/reservation</td>
                 <td>add a new mentor career bio.</td>
             </tr>
-            <!-- <tr>
-                <td>PUT</td>
-                <td>/career/:id</td>
-                <td>Update mentors career bio..</td>
-            </tr>
+         
             <tr>
                 <td>DELETE</td>
-                <td>/users/:id</td>
-                <td>A user record was deleted</td>
-            </tr> -->
+                <td>/mentee/:id/reservation/resID</td>
+                <td>delete made reservation</td>
+            </tr>
+               <tr>
+                <td>DELETE</td>
+                <td>/mentee/:id/reservation/</td>
+                <td>delete all made reservation</td>
+            </tr>
          
         </tbody>
     </table>
